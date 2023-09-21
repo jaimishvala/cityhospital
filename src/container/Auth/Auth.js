@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 function Auth(props) {
+    //state Component:
     const [type, setType] = useState("login")
     const [forgetpasword, setforgetPasword] = useState("login")
+
+    //Style Component:
+    const StyleButton = styled.button`
+    border:none;
+    background-color:red;
+    border-radius:50px;
+    padding:10px 25px;
+    color:white;
+    margin-top:10px;
+    &:hover{
+        background-color:#0d6efd;
+    }
+    `;
 
     return (
         <main>
@@ -11,10 +26,8 @@ function Auth(props) {
                     <div className="section-title">
                         {
                             type === 'login' ? <h2>Login</h2> : <h2>Signup</h2>
-                        }
-
-                        {
-                            forgetpasword === 'login' ? <h2>Login</h2> : <h2>Forget Password</h2>
+                                &&
+                                forgetpasword === 'login' ? <h2>Login</h2> : <h2>Forget Password</h2>
                         }
 
                     </div>
@@ -22,6 +35,7 @@ function Auth(props) {
                     <form action method="post" role="form" className="php-email-form">
                         <div className="row justify-content-center">
                             <div className="col-md-8 form-group">
+
                                 {
                                     type === 'login' ? null
                                         :
@@ -44,21 +58,25 @@ function Auth(props) {
                         <div class="text-center">
                             <br></br>
                             {
-                                type === 'login' ? <button type="submit">login</button> : <button type="submit">Signup</button>
+                                type === 'login' ? <button type="submit">login</button> : <button type="submit">Signup</button> &&
+                                    forgetpasword === 'login' ? <button type="submit">login</button> : <button type="submit">Submit</button>
                             }
 
                         </div>
                     </form>
 
                     {
-                        forgetpasword === 'login' ? <span>Forget Password<button onClick={() => setforgetPasword()}>ForgetPasword</button></span> : <span>Login Password<button onClick={() => setforgetPasword('login')}>Login</button></span>
+                        forgetpasword === 'login' ? <span>Forget Password<StyleButton onClick={() => setforgetPasword()}>ForgetPasword</StyleButton></span> : <span>Login Password<StyleButton onClick={() => setforgetPasword('login')}>Login</StyleButton></span>
                     }
 
                     <br></br>
 
                     {
-                        type === 'login' ? <span>Created An Acount <button onClick={() => setType()}>Signup</button></span> : <span>Alredy Have An Acount <button onClick={() => setType('login')}>Login</button></span>
+                        type === 'login' ? <span>Created An Acount <StyleButton onClick={() => setType()}>Signup</StyleButton></span> : <span>Alredy Have An Acount <StyleButton onClick={() => setType('login')}>Login</StyleButton></span>
                     }
+
+                    <br></br>
+                    <StyleButton>Hello</StyleButton>
 
                 </div>
             </section>
