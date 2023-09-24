@@ -1,15 +1,17 @@
 import React from 'react';
+import { ContactH4, Section } from '../../components/UI/Heading/Heading';
+import { Main, P, P1 } from '../../components/UI/TextArea/TextArea';
 
 function Contact(props) {
     return (
-        <div>
+        <Main>
             <section id="contact" className="contact">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Contact</h2>
-                        <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
+                        <Section>Contact</Section>
+                        <P>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                             blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
-                            luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
+                            luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</P>
                     </div>
                 </div>
                 <div className="container">
@@ -18,18 +20,18 @@ function Contact(props) {
                             <div className="info">
                                 <div className="address">
                                     <i className="bi bi-geo-alt" />
-                                    <h4>Location:</h4>
-                                    <p> F-505, Inovative Plazza New Delhi, India</p>
+                                    <ContactH4>Location:</ContactH4>
+                                    <P1> F-505, Inovative Plazza New Delhi, India</P1>
                                 </div>
                                 <div className="email">
                                     <i className="bi bi-envelope" />
-                                    <h4>Email:</h4>
-                                    <p>cityhospital@example.com</p>
+                                    <ContactH4>Email:</ContactH4>
+                                    <P1>cityhospital@example.com</P1>
                                 </div>
                                 <div className="phone">
                                     <i className="bi bi-phone" />
-                                    <h4>Call:</h4>
-                                    <p>+91 9988776655</p>
+                                    <ContactH4>Call:</ContactH4>
+                                    <P1>+91 9988776655</P1>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +63,7 @@ function Contact(props) {
                 </div>
             </section>
 
-        </div>
+        </Main>
     );
 }
 

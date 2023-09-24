@@ -1,86 +1,72 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import Button from '../../components/UI/Button';
+import InputBox from '../../components/InputBox/InputBox';
+import { Section } from '../../components/UI/Heading/Heading';
+import { Main } from '../../components/UI/TextArea/TextArea';
 
 function Auth(props) {
-    //state Component:
     const [type, setType] = useState("login")
-    const [forgetpasword, setforgetPasword] = useState("login")
-
-    //Style Component:
-    const StyleButton = styled.button`
-    border:none;
-    background-color:red;
-    border-radius:50px;
-    padding:10px 25px;
-    color:white;
-    margin-top:10px;
-    &:hover{
-        background-color:#0d6efd;
-    }
-    `;
 
     return (
-        <main>
+        <Main>
             <section id="departments" className="appointment">
                 <div className="container">
                     <div className="section-title">
                         {
-                            type === 'login' ? <h2>Login</h2> : <h2>Signup</h2>
-                                &&
-                                forgetpasword === 'login' ? <h2>Login</h2> : <h2>Forget Password</h2>
+                            type === 'login' ? <Section>Login</Section> :
+                                type === 'signup' ? <Section>Signup</Section> :
+                                    <Section>Forget Pasword</Section>
                         }
 
                     </div>
 
                     <form action method="post" role="form" className="php-email-form">
                         <div className="row justify-content-center">
-                            <div className="col-md-8 form-group">
-
-                                {
-                                    type === 'login' ? null
-                                        :
-                                        <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                }
-
-                            </div>
-                            <div className="col-md-8 form-group mt-3 mt-md-0">
-                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                            </div>
-                            <div className="col-md-8 form-group mt-3 mt-md-0">
-                                {
-                                    forgetpasword === 'login' ? <input type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                        : null
-
-                                }
-
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <br></br>
                             {
-                                type === 'login' ? <button type="submit">login</button> : <button type="submit">Signup</button> &&
-                                    forgetpasword === 'login' ? <button type="submit">login</button> : <button type="submit">Submit</button>
+                                type === 'signup' ?
+                                    <div className="col-md-8 form-group">
+                                        <InputBox type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    </div>
+                                    :
+                                    null
                             }
 
+                            <div className="col-md-8 form-group mt-3 mt-md-0">
+                                <InputBox type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                            </div>
+
+                            <div className="col-md-8 form-group mt-3 mt-md-0">
+                                {
+                                    type === 'login' || type === 'signup' ?
+                                        <InputBox type="password" className="form-control" name="password" id="password" placeholder="Your password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                        : null
+                                }
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            {
+                                type === 'login' ? <Button disabled={true} type="submit">Login</Button> :
+                                    type === 'signup' ? <Button btnDisabled={true} btnType="Secondary" type="submit">SignUp</Button> :
+                                        <Button btnType="Outline" type="submit">Submit</Button>
+                            }
                         </div>
                     </form>
 
                     {
-                        forgetpasword === 'login' ? <span>Forget Password<StyleButton onClick={() => setforgetPasword()}>ForgetPasword</StyleButton></span> : <span>Login Password<StyleButton onClick={() => setforgetPasword('login')}>Login</StyleButton></span>
+                        type === 'login' ? <span>Created An Acount <Button onClick={() => setType('signup')}>Signup</Button></span> :
+                            <span>Alredy Have An Acount <Button onClick={() => setType('login')}>Login</Button></span>
                     }
-
                     <br></br>
-
                     {
-                        type === 'login' ? <span>Created An Acount <StyleButton onClick={() => setType()}>Signup</StyleButton></span> : <span>Alredy Have An Acount <StyleButton onClick={() => setType('login')}>Login</StyleButton></span>
+                        type === 'login' ? <span>Forget Password<Button onClick={() => setType('forgot')}>Forget Pasword</Button></span> :
+                            null
                     }
 
-                    <br></br>
-                    <StyleButton>Hello</StyleButton>
 
                 </div>
             </section>
-        </main>
+        </Main>
 
     );
 }

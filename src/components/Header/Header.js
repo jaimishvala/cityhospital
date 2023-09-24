@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { HeaderH2 } from '../UI/Heading/Heading';
 
 function Header(props) {
     return (
@@ -23,7 +24,7 @@ function Header(props) {
                     <div className="logo">
                         <a href="index.html">
                             <h1 className="logo me-auto">City</h1><br />
-                            <h2 className="logo-tiny-text me-auto">Multispeciality Hospital</h2>
+                            <HeaderH2 className="logo-tiny-text me-auto">Multispeciality Hospital</HeaderH2>
                         </a>
                     </div>
                     <nav id="navbar" className="navbar order-last order-lg-0">

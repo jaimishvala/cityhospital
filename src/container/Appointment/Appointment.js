@@ -1,15 +1,18 @@
 import React from 'react';
+import { Section } from '../../components/UI/Heading/Heading';
+import { Main, P } from '../../components/UI/TextArea/TextArea';
+import Button from '../../components/UI/Button';
 
 function Appointment(props) {
     return (
-        <main>
+        <Main>
             <section id="appointment" className="appointment">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Make an Appointment</h2>
-                        <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
+                        <Section>Make an Appointment</Section>
+                        <P>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                             blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
-                            Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
+                            Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</P>
                     </div>
                     <form action method="post" role="form" className="php-email-form">
                         <div className="row">
@@ -50,11 +53,11 @@ function Appointment(props) {
                             <div className="error-message" />
                             <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                        <div className="text-center"><Button type="submit">Make an Appointment</Button></div>
                     </form>
                 </div>
             </section>
-        </main>
+        </Main>
     );
 }
 
