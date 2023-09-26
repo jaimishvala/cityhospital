@@ -1,6 +1,10 @@
 import React from 'react';
 import { H2, H4, Heading1, Heading2, Heading3, HomeH4, Section } from '../../components/UI/Heading/Heading';
 import { ItalicP, Main, P, P3, Span } from '../../components/UI/TextArea/TextArea';
+import Review from './Review';
+
+
+
 
 function Home(props) {
     return (
@@ -103,7 +107,11 @@ function Home(props) {
             </section>
             <section id="testimonials" className="testimonials">
                 <div className="container">
+
                     <div className="section-title"><Section>Reviews</Section></div>
+                   <Review />
+                    
+
                     <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="swiper-wrapper">
                             <div className="swiper-slide">

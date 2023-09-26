@@ -8,7 +8,7 @@ import About from "./container/About/About"
 import Contact from "./container/Contact/Contact"
 import Auth from "./container/Auth/Auth";
 import Appointment from "./container/Appointment/Appointment";
-
+import Product from "./components/Product/Product";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/Departments" element={<Department />}></Route>
         <Route exact path="/Doctors" element={<Doctor />}></Route>
-        <Route exact path="/About" element={<About />}></Route>
+        <Route exact path="/About" element={<Product />}></Route>
         <Route exact path="/Contact" element={<Contact />}></Route>
         <Route exact path="/Auth" element={<Auth />}></Route>
         <Route exact path="/Appointment" element={<Appointment />}></Route>

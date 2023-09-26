@@ -1,8 +1,17 @@
 import React from 'react';
 import { ContactH4, Section } from '../../components/UI/Heading/Heading';
 import { Main, P, P1 } from '../../components/UI/TextArea/TextArea';
+import * as yup from 'yup';
 
 function Contact(props) {
+
+    let ConstSchema = object({
+        name:yup.string().required("Please Enter Name")
+        email:yup.string()
+
+    });
+
+
     return (
         <Main>
             <section id="contact" className="contact">
