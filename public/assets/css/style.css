@@ -22,6 +22,56 @@ h6 {
   font-family: "Raleway", sans-serif;
 } */
 
+/*********************************Swiper-Slider***************************/
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant: initial;
+    line-height: 1
+}
+
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+    left: 10px;
+    border-radius: 3rem;
+    width: 50px;
+    right: auto;
+    color: black;
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.swiper-button-prev:after,
+.swiper-container-rtl .swiper-button-next:after {
+    content: 'prev';
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+    border-radius: 3rem;
+    width: 50px;
+    right: 10px;
+    left: auto;
+    color: black;
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.swiper-button-next:after,
+.swiper-container-rtl .swiper-button-prev:after {
+    content: 'next';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
