@@ -33,6 +33,9 @@ function Header(props) {
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/">Home</NavLink></li>
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Departments">Departments</NavLink></li>
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Doctors">Doctors</NavLink></li>
+
+                            <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Medicine">Medicine</NavLink></li>
+
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/About">About</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to="/Contact">Contact</NavLink></li>
                         </ul>

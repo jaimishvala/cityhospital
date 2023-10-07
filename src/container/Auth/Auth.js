@@ -3,9 +3,72 @@ import Button from '../../components/UI/Button';
 import InputBox from '../../components/InputBox/InputBox';
 import { Section } from '../../components/UI/Heading/Heading';
 import { Main } from '../../components/UI/TextArea/TextArea';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 
 function Auth(props) {
     const [type, setType] = useState("login")
+
+    let authObj, iniVal;
+
+    if (type === 'login') {
+        authObj = {
+            email: yup.string().email().required(),
+            password: yup.string().required()
+        }
+
+        iniVal = {
+            email: '',
+            password: ''
+        }
+    } else if (type === 'signup') {
+        authObj = {
+            name: yup.string().required(),
+            email: yup.string().email().required(),
+            password: yup.string().required(),
+            con_password: yup.string().required().test("con_password", "Not Same Password", function (value) {
+                // console.log(v);
+                if (value == this.parent.password) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+        }
+
+        iniVal = {
+            name: '',
+            email: '',
+            password: '',
+            con_password: ''
+        }
+    } else {
+        authObj = {
+            email: yup.string().email().required(),
+        }
+
+        iniVal = {
+            email: ''
+        }
+    }
+
+
+    let AuthSchema = yup.object().shape(authObj);
+
+    const formikObj = useFormik({
+
+        initialValues: iniVal,
+
+        onSubmit: values => {
+            console.log(values)
+        },
+
+        enableReinitialize: true,
+        validationSchema: AuthSchema
+    });
+
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched } = formikObj
+    console.log(errors);
 
     return (
         <Main>
@@ -20,34 +83,92 @@ function Auth(props) {
 
                     </div>
 
-                    <form action method="post" role="form" className="php-email-form">
+                    <form onSubmit={handleSubmit} role="form" className="php-email-form">
                         <div className="row justify-content-center">
                             {
                                 type === 'signup' ?
                                     <div className="col-md-8 form-group">
-                                        <InputBox type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                        <InputBox
+                                            type="text"
+                                            name="name"
+                                            className="form-control"
+                                            id="name"
+                                            placeholder="Your Name"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.name}
+                                            TextError={errors.name && touched.name ? <span>{errors.name}</span> : ''}
+                                        />
+                                        {/* {errors.name && touched.name ? <span>{errors.name}</span> : null} */}
                                     </div>
                                     :
                                     null
                             }
 
                             <div className="col-md-8 form-group mt-3 mt-md-0">
-                                <InputBox type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <InputBox
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Your Email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                    TextError={errors.email && touched.email ? <span>{errors.email}</span> : ''}
+                                />
+                                {/* {errors.email && touched.email ? <span>{errors.email}</span> : null} */}
                             </div>
 
-                            <div className="col-md-8 form-group mt-3 mt-md-0">
-                                {
-                                    type === 'login' || type === 'signup' ?
-                                        <InputBox type="password" className="form-control" name="password" id="password" placeholder="Your password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                        : null
-                                }
-                            </div>
+
+                            {
+
+                                type === 'login' || type === 'signup' ?
+                                    <div className="col-md-8 form-group mt-3 mt-md-0">
+                                        <InputBox
+                                            type="password"
+                                            className="form-control"
+                                            name="password"
+                                            id="password"
+                                            placeholder="Your password"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.password}
+                                            TextError={errors.password && touched.password ? <span>{errors.password}</span> : ''}
+                                        />
+                                        {/* {errors.password && touched.password ? <span>{errors.password}</span> : null} */}
+                                    </div>
+                                    : null
+
+                            }
+
+                            {
+
+                                type === 'signup' ?
+                                    <div className="col-md-8 form-group mt-3 mt-md-0">
+                                        <InputBox
+                                            type="password"
+                                            className="form-control"
+                                            name="con_password"
+                                            id="con_password"
+                                            placeholder="Your Confirmed password"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.con_password}
+                                            TextError={errors.con_password && touched.con_password ? <span>{errors.con_password}</span> : ''}
+                                        />
+                                        {/* {errors.con_password && touched.con_password ? <span>{errors.con_password}</span> : null} */}
+                                    </div>
+                                    : null
+
+                            }
+
                         </div>
 
                         <div class="text-center">
                             {
-                                type === 'login' ? <Button disabled={true} type="submit">Login</Button> :
-                                    type === 'signup' ? <Button btnDisabled={true} btnType="Secondary" type="submit">SignUp</Button> :
+                                type === 'login' ? <Button type="submit">Login</Button> :
+                                    type === 'signup' ? <Button btnType="Secondary" type="submit">SignUp</Button> :
                                         <Button btnType="Outline" type="submit">Submit</Button>
                             }
                         </div>

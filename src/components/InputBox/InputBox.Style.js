@@ -16,3 +16,7 @@ export const BaseInput = styled.input`
     }
 
 `
+
+export const InputError = styled.span`
+    color:red
+`

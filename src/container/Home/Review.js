@@ -11,10 +11,10 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 import Card from '../../components/UI/Card/Card';
+import { Link } from 'react-router-dom';
 
 
-
-function Review(props) {
+export function Review(props) {
     const [rData, setrData] = useState([])
 
     const getReview = async () => {
@@ -39,7 +39,6 @@ function Review(props) {
             <section id="testimonials" className="testimonials">
                 <div className="container">
 
-                    {/* <div className="section-title"><Section>Reviews</Section></div> */}
                     <Swiper
                         slidesPerView={2}
                         spaceBetween={20}
@@ -70,10 +69,12 @@ function Review(props) {
                                 rData.map((v) => {
                                     return (
                                         <SwiperSlide>
-                                            <Card
-                                                title={v.name}
-                                                SubTitle={v.body}
-                                            />
+                                            <Link to={"/ReviewPage/" + v.id}>
+                                                <Card
+                                                    title={v.name}
+                                                    SubTitle={v.body}
+                                                />
+                                            </Link>
                                         </SwiperSlide>
                                     )
                                 })

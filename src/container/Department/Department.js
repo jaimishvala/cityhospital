@@ -1,16 +1,25 @@
 import React from 'react';
-import { H3, Section } from '../../components/UI/Heading/Heading';
+import { H3, HeaderH2, Section } from '../../components/UI/Heading/Heading';
 import { DepartmentP, Main } from '../../components/UI/TextArea/TextArea';
+import { Link } from 'react-router-dom';
 
 function Department(props) {
+
     return (
 
         <Main>
+
             <section id="departments" className="departments">
                 <div className="container">
                     <div className="section-title">
                         <Section>Departments</Section>
+
+                        <Link to={"/Departments/1"}>Department-1</Link>
+                        <Link to={"/Departments/2"}>Department-2</Link>
+                        <Link to={"/Departments/3"}>Department-3</Link>
                     </div>
+
+
                     <div className="row">
                         <div className="col-lg-3">
                             <ul className="nav nav-tabs flex-column">
@@ -113,6 +122,8 @@ function Department(props) {
                     </div>
                 </div>
             </section>
+
+
         </Main>
 
 
