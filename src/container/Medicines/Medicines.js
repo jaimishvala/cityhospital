@@ -70,10 +70,6 @@ function Medicines(props) {
 
     console.log(Medicines);
 
-    // let fData = Medicines.filter((v) => v.id == id)
-    // setMedicines(fData)
-
-
     return (
         <>
             <br></br>

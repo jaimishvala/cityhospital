@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Heading2 } from '../../components/UI/Card/Card.Style';
+import { CardDiv, Heading2 } from '../../components/UI/Card/Card.Style';
 import { useParams } from 'react-router-dom';
 import { Heading3, Heading4 } from '../../components/UI/Heading/Heading';
 import { Span } from '../../components/UI/TextArea/TextArea';
-import { Card } from '@mui/material';
+
 
 function MedicinesUser(props) {
 
@@ -77,16 +77,18 @@ function MedicinesUser(props) {
 
 
     return (
-
-        <div>
+        <>
             <br></br>
-            <Heading4>Medicines:{id}</Heading4>
-            <Heading2>{fData[0].name}</Heading2>
-            <Span>{fData[0].expiry}</Span>
-            <Heading3>{fData[0].price}</Heading3>
+            <CardDiv>
+                <Heading4>Medicines:{id}</Heading4>
+                <Heading2>{fData[0].name}</Heading2>
+                <Span>{fData[0].expiry}</Span>
+                <Heading3>{fData[0].price}</Heading3>
+            </CardDiv>
             <br></br>
-        </div>
+        </>
     );
+
 }
 
 export default MedicinesUser;
