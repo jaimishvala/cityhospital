@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { Heading1, Heading2, Heading3 } from '../../components/UI/Heading/Heading';
 import { P, Span } from '../../components/UI/TextArea/TextArea';
 import { Card } from '@mui/material';
-import { green } from '@mui/material/colors';
 
 
 function Medicines(props) {
@@ -89,10 +88,9 @@ function Medicines(props) {
     }, [])
 
 
-    const handlesearchsort = (value) => {
-        console.log(value);
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+    const handlesearchsort = () => {
 
+        let localData = JSON.parse(localStorage.getItem("medicines"));
 
         let fdata = localData.filter((v) => {
             return (
@@ -108,10 +106,15 @@ function Medicines(props) {
                 return a.name.localeCompare(b.name);
             } else if (sort === 'za') {
                 return b.name.localeCompare(a.name);
+            } else if (sort === 'lh') {
+                return a.price - b.price;
+            } else if (sort === 'hl') {
+                return b.price - a.price;
             }
         })
 
         return fdata;
+
     }
 
 
@@ -133,6 +136,8 @@ function Medicines(props) {
                         <option value="0">--Select---</option>
                         <option value="az">A To Z</option>
                         <option value="za">Z TO A</option>
+                        <option value="lh">Low To High</option>
+                        <option value="hl">High To Low</option>
                     </select>
                 </>
             }
