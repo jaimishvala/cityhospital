@@ -16,7 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 
 
-export default function Medicine(props) {
+export default function Doctor(props) {
     const [open, setOpen] = React.useState(false);
     const [mdata, setMdata] = useState([])
     const [update, setUpdate] = useState(false)
@@ -24,7 +24,7 @@ export default function Medicine(props) {
     // console.log(mdata);
 
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        let localData = JSON.parse(localStorage.getItem("doctor"));
 
         if (localData) {
             setMdata(localData)
@@ -34,7 +34,6 @@ export default function Medicine(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
-        // console.log("handleClickOpen");
     };
 
     const handleClose = () => {
@@ -43,7 +42,7 @@ export default function Medicine(props) {
 
     const handleAdd = (data) => {
 
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        let localData = JSON.parse(localStorage.getItem("doctor"));
         console.log(localData);
 
         let id = Math.floor(Math.random() * 1000);
@@ -51,87 +50,82 @@ export default function Medicine(props) {
 
         if (localData) {
             localData.push({ id: id, ...data })
-            localStorage.setItem("medicines", JSON.stringify(localData))
+            localStorage.setItem("doctor", JSON.stringify(localData))
             setMdata(localData)
-
         } else {
-            localStorage.setItem("medicines", JSON.stringify([{ id, ...data }]))
+            localStorage.setItem("doctor", JSON.stringify([{ id, ...data }]))
             setMdata(localData)
-            setUpdate(null)
         }
 
     }
 
-    let date = new Date();
-    let nd = new Date(date.setDate(date.getDate() - 1));
 
-
-    let Medicineschema = yup.object().shape({
+    let Doctorschema = yup.object().shape({
         name: yup.string()
             .required("Please Enter Name")
             .matches(/^[a-zA-Z]{2,30}$/, "Please Enter Valid Name"),
-        price: yup.string()
-            .required("Please Enter a Price")
+        desc: yup.string()
+            .required("Please Enter a Description")
             .matches(
-                /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/,
-                "Please Enter a Positive"
-            ),
-        date: yup.date()
-            .min(nd, "Please Enter a valid Date")
-            .required("Please Enter a Date"),
-        message: yup.string()
-            .min(10)
-            .max(100)
-            .required("Please Enter a Message")
+                /^(.|\s)*[a-zA-Z]+(.|\s)*$/, "Please Enter a Description"),
+        // .test("desc", "Please Enter More Than 20 Word Allowed", function (value) {
+        //     // console.log(value);
+        //     if (value <= 20) {
+        //         return true;
+        //     }
+        // }),
+        designation: yup.string()
+            .required("Please Enter a Designation")
+            .matches(/^[a-z ,.'-]+$/, "Please Enter Valid Designation"),
+        profile_url: yup.string()
+            .required("Please Enter a Profile URL")
+            .matches(/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/, "Please Enter https And WWW")
     })
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } = useFormik({
-        validationSchema: Medicineschema,
+        validationSchema: Doctorschema,
         initialValues: {
             name: '',
-            price: '',
-            date: '',
-            message: '',
+            desc: '',
+            designation: '',
+            profile_url: '',
         },
         onSubmit: (values, action) => {
-            // console.log(values);
+            console.log(values);
 
             if (update) {
                 handleUpdateData(values)
             } else {
                 handleAdd(values)
             }
-            // handleAdd(values)
+            handleAdd(values)
             action.resetForm()
-            handleClose()
         },
 
     });
 
 
     const handleUpdateData = (data) => {
-        // console.log(data);
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        console.log(data);
+        let localData = JSON.parse(localStorage.getItem("doctor"));
+        console.log(localData);
 
-        let index = localData.findIndex((v) => v.id === data.id)
-        // console.log(index);
+        let index = localData.filter((v) => v.id === data.id)
+        console.log(index);
 
         localData[index] = data
 
-        localStorage.setItem("medicines", JSON.stringify(localData))
+        localStorage.setItem("doctor", JSON.stringify(localData))
         setMdata(localData)
-
-        setUpdate(false)
     }
 
     const handleDelet = (id) => {
-        // console.log(id);
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        let localData = JSON.parse(localStorage.getItem("doctor"));
 
         let fdata = localData.filter((v) => v.id !== id)
         console.log(fdata);
 
-        localStorage.setItem("medicines", JSON.stringify(fdata))
+        localStorage.setItem("doctor", JSON.stringify(fdata))
 
         setMdata(fdata)
     }
@@ -145,9 +139,9 @@ export default function Medicine(props) {
 
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'price', headerName: 'Price', width: 130 },
-        { field: 'date', headerName: 'Date', width: 130 },
-        { field: 'message', headerName: 'Message', width: 130 },
+        { field: 'desc', headerName: 'Description', width: 130 },
+        { field: 'designation', headerName: 'Designation', width: 130 },
+        { field: 'profile_url', headerName: 'Profile URL', width: 130 },
         {
             field: "action",
             headerName: "Action",
@@ -171,17 +165,17 @@ export default function Medicine(props) {
 
     return (
         <div>
-            <h2>Medicines:</h2>
+            <h2>Doctor:</h2>
             <Button variant="outlined" onClick={handleClickOpen}>
-                ADD MEDICINES
+                ADD Doctor
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Medicine</DialogTitle>
+                <DialogTitle>Doctor</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please Enter a Medicine Data When You are Enter a Data Please Mark
-                        Some Thing Please Enter Appropriate Name,Description, Price and
-                        Expiry.
+                        Please Enter a Doctor Data When You are Enter a Data Please Mark
+                        Some Thing Please Enter Appropriate Name,Description, Designation and
+                        Profile URL.
                     </DialogContentText>
                     <TextField
                         margin="dense"
@@ -199,46 +193,46 @@ export default function Medicine(props) {
 
                     <TextField
                         margin="dense"
-                        id="price"
-                        name='price'
-                        label="Enter Price"
-                        type="number"
-                        fullWidth
-                        variant="standard"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.price}
-                    />
-                    {errors.price && touched.price ? <span>{errors.price}</span> : null}
-
-                    <TextField
-                        margin="dense"
-                        id="date"
-                        type="date"
-                        name='date'
-                        label="Expiry Date"
-                        fullWidth
-                        variant="standard"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.date}
-                    />
-                    {errors.date && touched.date ? <span>{errors.date}</span> : null}
-
-
-                    <TextField
-                        margin="dense"
-                        id="message"
-                        name='message'
-                        label="Enter message"
+                        id="desc"
+                        name='desc'
+                        label="Enter desc"
                         type="text"
                         fullWidth
                         variant="standard"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.message}
+                        value={values.desc}
                     />
-                    {errors.message && touched.message ? <span>{errors.message}</span> : null}
+                    {errors.desc && touched.desc ? <span>{errors.desc}</span> : null}
+
+                    <TextField
+                        margin="dense"
+                        id="designation"
+                        type="text"
+                        name='designation'
+                        label="Enter Designation"
+                        fullWidth
+                        variant="standard"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.designation}
+                    />
+                    {errors.designation && touched.designation ? <span>{errors.designation}</span> : null}
+
+
+                    <TextField
+                        margin="profile_url"
+                        id="profile_url"
+                        name='profile_url'
+                        label="Enter Fb Profile URL"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.profile_url}
+                    />
+                    {errors.profile_url && touched.profile_url ? <span>{errors.profile_url}</span> : null}
 
                 </DialogContent>
                 <DialogActions>

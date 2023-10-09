@@ -27,7 +27,7 @@ function UserRoute(props) {
 
                 <Route exact path="/Departments" element={<Department />} />
                 <Route exact path='/Departments/:id' element={<Dept />} />
-                
+
                 <Route exact path="/Doctors" element={<Doctor />} />
 
 
