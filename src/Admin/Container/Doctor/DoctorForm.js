@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-function MedicineForm({ onHandleSubmit, updateData }) {
+function DoctorForm({ onHandleSubmit, updateData }) {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -30,43 +30,41 @@ function MedicineForm({ onHandleSubmit, updateData }) {
         setOpen(false);
     };
 
-    let date = new Date();
-    let nd = new Date(date.setDate(date.getDate() - 1));
 
-    let Medicineschema = yup.object().shape({
+    let Doctorschema = yup.object().shape({
         name: yup.string()
             .required("Please Enter Name")
             .matches(/^[a-zA-Z]{2,30}$/, "Please Enter Valid Name"),
-        price: yup.string()
-            .required("Please Enter a Price")
+        desc: yup.string()
+            .required("Please Enter a Description")
             .matches(
-                /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/,
-                "Please Enter a Positive"
-            ),
-        date: yup.date()
-            .min(nd, "Please Enter a valid Date")
-            .required("Please Enter a Date"),
-        message: yup.string()
-            .min(10)
-            .max(100)
-            .required("Please Enter a Message")
+                /^(.|\s)*[a-zA-Z]+(.|\s)*$/, "Please Enter a Description"),
+        // .test("desc", "Please Enter More Than 20 Word Allowed", function (value) {
+        //     // console.log(value);
+        //     if (value <= 20) {
+        //         return true;
+        //     }
+        // }),
+        designation: yup.string()
+            .required("Please Enter a Designation")
+            .matches(/^[a-z ,.'-]+$/, "Please Enter Valid Designation"),
+        profile_url: yup.string()
+            .required("Please Enter a Profile URL")
+            .matches(/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/, "Please Enter https And WWW")
     })
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } = useFormik({
-        validationSchema: Medicineschema,
+        validationSchema: Doctorschema,
         initialValues: {
             name: '',
-            price: '',
-            date: '',
-            message: '',
+            desc: '',
+            designation: '',
+            profile_url: '',
         },
         onSubmit: (values, action) => {
-
-            onHandleSubmit(values)      //Liftting State Up:
-
-
             // console.log(values);
 
+            onHandleSubmit(values)
             // if (update) {
             //     handleUpdateData(values)
             // } else {
@@ -79,19 +77,20 @@ function MedicineForm({ onHandleSubmit, updateData }) {
 
     });
 
+
     return (
         <div>
-            <h2>Medicines:</h2>
+            <h2>Doctor:</h2>
             <Button variant="outlined" onClick={handleClickOpen}>
-                ADD MEDICINES
+                ADD Doctor
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Medicine</DialogTitle>
+                <DialogTitle>Doctor</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please Enter a Medicine Data When You are Enter a Data Please Mark
-                        Some Thing Please Enter Appropriate Name,Description, Price and
-                        Expiry.
+                        Please Enter a Doctor Data When You are Enter a Data Please Mark
+                        Some Thing Please Enter Appropriate Name,Description, Designation and
+                        Profile URL.
                     </DialogContentText>
                     <TextField
                         margin="dense"
@@ -109,56 +108,56 @@ function MedicineForm({ onHandleSubmit, updateData }) {
 
                     <TextField
                         margin="dense"
-                        id="price"
-                        name='price'
-                        label="Enter Price"
-                        type="number"
-                        fullWidth
-                        variant="standard"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.price}
-                    />
-                    {errors.price && touched.price ? <span>{errors.price}</span> : null}
-
-                    <TextField
-                        margin="dense"
-                        id="date"
-                        type="date"
-                        name='date'
-                        label="Expiry Date"
-                        fullWidth
-                        variant="standard"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.date}
-                    />
-                    {errors.date && touched.date ? <span>{errors.date}</span> : null}
-
-
-                    <TextField
-                        margin="dense"
-                        id="message"
-                        name='message'
-                        label="Enter message"
+                        id="desc"
+                        name='desc'
+                        label="Enter desc"
                         type="text"
                         fullWidth
                         variant="standard"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.message}
+                        value={values.desc}
                     />
-                    {errors.message && touched.message ? <span>{errors.message}</span> : null}
+                    {errors.desc && touched.desc ? <span>{errors.desc}</span> : null}
+
+                    <TextField
+                        margin="dense"
+                        id="designation"
+                        type="text"
+                        name='designation'
+                        label="Enter Designation"
+                        fullWidth
+                        variant="standard"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.designation}
+                    />
+                    {errors.designation && touched.designation ? <span>{errors.designation}</span> : null}
+
+
+                    <TextField
+                        margin="profile_url"
+                        id="profile_url"
+                        name='profile_url'
+                        label="Enter Fb Profile URL"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.profile_url}
+                    />
+                    {errors.profile_url && touched.profile_url ? <span>{errors.profile_url}</span> : null}
 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSubmit}>{updateData ? "Update" : "Add"}</Button>
-
                 </DialogActions>
             </Dialog>
+
         </div>
     );
 }
 
-export default MedicineForm;
+export default DoctorForm;

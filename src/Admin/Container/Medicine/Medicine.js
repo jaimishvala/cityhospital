@@ -9,7 +9,6 @@ import MedicineForm from './MedicineForm';
 
 
 export default function Medicine() {
-
     const [mdata, setMdata] = useState([])
     const [update, setUpdate] = useState(false)
 
@@ -30,7 +29,7 @@ export default function Medicine() {
         let id = Math.floor(Math.random() * 1000);
         // console.log(id);
 
-        if (localData) {         
+        if (localData) {
             if (update) {
                 //Update
                 let index = localData.findIndex((v) => v.id === data.id)
@@ -73,7 +72,7 @@ export default function Medicine() {
     const handleEdit = (data) => {
         // handleClickOpen()
         // setValues(data)
-        setUpdate(true)
+        setUpdate(data)
     }
 
 

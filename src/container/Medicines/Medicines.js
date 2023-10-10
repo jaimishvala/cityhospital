@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Heading1, Heading2, Heading3 } from '../../components/UI/Heading/Heading';
 import { P, Span } from '../../components/UI/TextArea/TextArea';
-import { Card } from '@mui/material';
+import { Button, Card } from '@mui/material';
 
 
 function Medicines(props) {
@@ -139,6 +139,8 @@ function Medicines(props) {
                         <option value="lh">Low To High</option>
                         <option value="hl">High To Low</option>
                     </select>
+
+
                 </>
             }
 
@@ -155,7 +157,7 @@ function Medicines(props) {
                                     <Heading2>{v.price}</Heading2>
                                     <Heading3>{v.date}</Heading3>
                                     <p>{v.message}</p>
-
+                                    <button>Add To Card</button>
                                 </Card>
                                 <br></br><br></br>
                             </div>
