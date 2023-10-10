@@ -1,7 +1,7 @@
 import React from 'react';
 import { Section } from '../../components/UI/Heading/Heading';
 import { Main, P } from '../../components/UI/TextArea/TextArea';
-import Button from '../../components/UI/Button';
+import Button from '../../components/UI/Button/Button';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { type } from '@testing-library/user-event/dist/type';

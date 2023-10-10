@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from '../../components/UI/Button';
+import Button from '../../components/UI/Button/Button';
 import InputBox from '../../components/InputBox/InputBox';
 import { Section } from '../../components/UI/Heading/Heading';
 import { Main } from '../../components/UI/TextArea/TextArea';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import Footers from "../components/Footer/Footers";
 import Header from "../components/Header/Header";
@@ -18,9 +18,12 @@ import MedicinesUser from '../container/Medicines/MedicinesUser';
 
 
 function UserRoute(props) {
+    const [countCart, setCountCart] = useState(0)
+
     return (
         <>
-            <Header />
+            <Header countCart={countCart} />
+
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path='/ReviewPage/:id' element={<ReviewPage />} />
@@ -31,7 +34,8 @@ function UserRoute(props) {
                 <Route exact path="/Doctors" element={<Doctor />} />
 
 
-                <Route exact path='/Medicine' element={<Medicines />} />
+                <Route exact path='/Medicine' element={<Medicines increment={setCountCart} />} />
+
                 <Route exact path='/MedicinesUser/:id' element={<MedicinesUser />} />
 
 

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Heading1, Heading2, Heading3 } from '../../components/UI/Heading/Heading';
 import { P, Span } from '../../components/UI/TextArea/TextArea';
-import { Button, Card } from '@mui/material';
+import { Button } from '@mui/material';
+import { Title } from '@mui/icons-material';
+import Card from '../../components/UI/Card/Card';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
-function Medicines(props) {
+function Medicines({ increment }) {
 
     // const MedicinesData = [
     //     {
@@ -75,17 +78,26 @@ function Medicines(props) {
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState("")
 
-    // console.log(Medicines);
-
-    let localData = JSON.parse(localStorage.getItem("medicines"));
-    console.log(localData);
-
     // console.log(adminMedicine);
-    useEffect(() => {
-        // setMedicines(MedicinesData)
+
+    const getData = () => {
+        let localData = JSON.parse(localStorage.getItem("medicines"));
+        // console.log(localData);
 
         setadminMedicine(localData)
+    }
+
+    const handleAddCart = () => {
+        console.log("dsfdsf");
+
+        increment((prev) => prev + 1)
+    }
+
+    useEffect(() => {
+        getData()
     }, [])
+
+
 
 
     const handlesearchsort = () => {
@@ -119,7 +131,7 @@ function Medicines(props) {
 
 
     let finalData = handlesearchsort();
-
+    // console.log(finalData);
     // let finalData = filterData.length > 0 ? filterData : localData
     // console.log(finalData);
 
@@ -152,13 +164,12 @@ function Medicines(props) {
 
                         return (
                             <div className='col-lg-3'>
-                                <Card>
-                                    <Heading1>{v.name}</Heading1>
-                                    <Heading2>{v.price}</Heading2>
-                                    <Heading3>{v.date}</Heading3>
-                                    <p>{v.message}</p>
-                                    <button>Add To Card</button>
-                                </Card>
+                                <Card
+                                    title={v.name}
+                                    SubTitle={v.price}
+                                    btnValue="Add To Cart"
+                                    btnClick={handleAddCart}
+                                />
                                 <br></br><br></br>
                             </div>
 
@@ -166,6 +177,7 @@ function Medicines(props) {
 
                     })
                 }
+
 
                 {/* {
                     finalData.map((v) => {
@@ -178,6 +190,7 @@ function Medicines(props) {
                                         <Heading2>{v.price}</Heading2>
                                         <P>{v.desc}</P>
                                         <Span>{v.expiry}</Span>
+                                       
                                     </Card>
                                 </Link>
                             </div>

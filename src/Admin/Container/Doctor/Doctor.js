@@ -25,6 +25,7 @@ export default function Doctor() {
 
 
     const handleFormSubmit = (data) => {
+        console.log(data);
         let localData = JSON.parse(localStorage.getItem("doctor"));
         console.log(localData);
 
@@ -33,8 +34,8 @@ export default function Doctor() {
         if (localData) {
             if (update) {
                 //update
-                let index = localData.filter((v) => v.id === data.id)
-                // console.log(index);
+                let index = localData.findIndex((v) => v.id === data.id)
+                console.log(index);
 
                 localData[index] = data
 

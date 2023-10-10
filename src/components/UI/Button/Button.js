@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseButton, OutlineButton, PrimaryButton, SecondaryButton } from './Button.Style.js'
+import { BaseButton, OutlineButton, PrimaryButton, SecondaryButton } from '../Button/Button.Style'
 
 function Button({ children, btnType = "Primary", btnDisabled = false, ...rest }) {
 
