@@ -5,8 +5,9 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-function Header({ countCart }) {
+function Header({ countCart, fav }) {
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -28,11 +29,21 @@ function Header({ countCart }) {
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
+                        {/* 
+                        <FavoriteBorderIcon favorite={favorite} /> */}
+
+                        <IconButton aria-label="cart">
+                            <StyledBadge badgeContent={fav.length} color="secondary">
+                                <FavoriteIcon />
+                            </StyledBadge>
+                        </IconButton>
+
                         <IconButton aria-label="cart">
                             <StyledBadge badgeContent={countCart} color="secondary">
                                 <ShoppingCartIcon />
                             </StyledBadge>
                         </IconButton>
+
 
                         <a href="#" className="twitter"><i className="bi bi-twitter" /></a>
                         <a href="#" className="facebook"><i className="bi bi-facebook" /></a>

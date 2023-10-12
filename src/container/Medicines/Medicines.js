@@ -7,7 +7,6 @@ import { Title } from '@mui/icons-material';
 import Card from '../../components/UI/Card/Card';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-
 function Medicines({ increment }) {
 
     // const MedicinesData = [
@@ -77,26 +76,39 @@ function Medicines({ increment }) {
     const [adminMedicine, setadminMedicine] = useState([])
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState("")
+    const [fav, setFav] = useState([])
 
     // console.log(adminMedicine);
 
     const getData = () => {
         let localData = JSON.parse(localStorage.getItem("medicines"));
-        // console.log(localData);
+        console.log(localData);
 
         setadminMedicine(localData)
-    }
-
-    const handleAddCart = () => {
-        console.log("dsfdsf");
-
-        increment((prev) => prev + 1)
     }
 
     useEffect(() => {
         getData()
     }, [])
 
+    const handleAddCart = () => {
+        console.log("dsfdsf");
+        increment((prev) => prev + 1)
+    }
+
+    const handleFavoritebar = (id) => {
+        // console.log(id);
+
+        if (fav.includes(id)) {
+            let fdata = fav.filter((v) => v !== id)
+            console.log(fdata);
+            setFav(fdata)
+        } else {
+            setFav((prev) => [...prev, id])
+        }
+
+    }
+    console.log(fav);
 
 
 
@@ -137,7 +149,7 @@ function Medicines({ increment }) {
 
 
     return (
-        <>
+        <div className='container'>
             <br></br>
 
             {
@@ -168,7 +180,9 @@ function Medicines({ increment }) {
                                     title={v.name}
                                     SubTitle={v.price}
                                     btnValue="Add To Cart"
-                                    btnClick={handleAddCart}
+                                    btnClick={() => handleAddCart(v.id)}
+                                    favclick={() => handleFavoritebar(v.id)}
+                                    favStatus={fav.includes(v.id) ? true : false}
                                 />
                                 <br></br><br></br>
                             </div>
@@ -205,7 +219,7 @@ function Medicines({ increment }) {
             </div >
 
             <br></br>
-        </>
+        </div>
     );
 
 }

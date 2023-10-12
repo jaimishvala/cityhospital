@@ -15,14 +15,16 @@ import Dept from '../container/Department/Dept';
 import ReviewPage from '../container/Home/ReviewPage';
 import Medicines from '../container/Medicines/Medicines';
 import MedicinesUser from '../container/Medicines/MedicinesUser';
+import FormSubmition from '../container/Appointment/FormSubmition';
 
 
 function UserRoute(props) {
     const [countCart, setCountCart] = useState(0)
+    const [fav, setFav] = useState([])
 
     return (
         <>
-            <Header countCart={countCart} />
+            <Header countCart={countCart} fav={fav} />
 
             <Routes>
                 <Route exact path="/" element={<Home />} />
@@ -31,10 +33,10 @@ function UserRoute(props) {
                 <Route exact path="/Departments" element={<Department />} />
                 <Route exact path='/Departments/:id' element={<Dept />} />
 
-                <Route exact path="/Doctors" element={<Doctor />} />
+                <Route exact path="/Doctors" element={<FormSubmition />} />
 
 
-                <Route exact path='/Medicine' element={<Medicines increment={setCountCart} />} />
+                <Route exact path='/Medicine' element={<Medicines increment={setCountCart} fav={fav} setFav={setFav} />} />
 
                 <Route exact path='/MedicinesUser/:id' element={<MedicinesUser />} />
 

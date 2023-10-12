@@ -44,3 +44,7 @@ color:brown;
 export const Image = styled.img`
 width:100%
 `
+
+export const Like = styled.span`
+margin-left: 190px;
+`
