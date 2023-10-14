@@ -16,6 +16,7 @@ import ReviewPage from '../container/Home/ReviewPage';
 import Medicines from '../container/Medicines/Medicines';
 import MedicinesUser from '../container/Medicines/MedicinesUser';
 import FormSubmition from '../container/Appointment/FormSubmition';
+import Counter from '../container/Counter/Counter';
 
 
 function UserRoute(props) {
@@ -34,7 +35,8 @@ function UserRoute(props) {
                 <Route exact path='/Departments/:id' element={<Dept />} />
 
                 <Route exact path="/Doctors" element={<FormSubmition />} />
-
+                {/* Counter */}
+                <Route exact path="/Counter" element={<Counter />} />
 
                 <Route exact path='/Medicine' element={<Medicines increment={setCountCart} fav={fav} setFav={setFav} />} />
 

@@ -6,8 +6,10 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useSelector } from 'react-redux';
 
 function Header({ countCart, fav }) {
+    const c1 = useSelector(state => state.counter)
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -33,13 +35,13 @@ function Header({ countCart, fav }) {
                         <FavoriteBorderIcon favorite={favorite} /> */}
 
                         <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={fav.length} color="secondary">
+                            <StyledBadge badgeContent={fav} color="secondary">
                                 <FavoriteIcon />
                             </StyledBadge>
                         </IconButton>
 
                         <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={countCart} color="secondary">
+                            <StyledBadge badgeContent={c1.count} color="secondary">
                                 <ShoppingCartIcon />
                             </StyledBadge>
                         </IconButton>
@@ -70,6 +72,7 @@ function Header({ countCart, fav }) {
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Departments">Departments</NavLink></li>
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Doctors">Doctors</NavLink></li>
 
+                            <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Counter">Counter</NavLink></li>
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/Medicine">Medicine</NavLink></li>
 
                             <li><NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/About">About</NavLink></li>

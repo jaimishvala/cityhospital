@@ -43,6 +43,7 @@ function MedicineForm({ onHandleSubmit, updateData }) {
                 /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/,
                 "Please Enter a Positive"
             ),
+            
         date: yup.date()
             .min(nd, "Please Enter a valid Date")
             .required("Please Enter a Date"),

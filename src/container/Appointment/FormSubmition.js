@@ -1,153 +1,132 @@
-import React, { useEffect, useState } from 'react';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-import { type } from '@testing-library/user-event/dist/type';
+import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-function FormSubmition(props) {
-    // const [currState, setCurrState] = useState(1);
-    // const [allState, setAllstate] = useState(3);
+const categoryOptions = ['Electronics', 'Clothing', 'Books'];
 
-    let SubmitionFormschema = yup.object().shape({
-        name: yup.string()
-            .required("Please Enter Name")
-            .matches(/^[a-zA-Z]{2,30}$/, "Please Enter Valid Name"),
-        email: yup.string()
-            .email("Please Enter Valid Email")
-            .required("Please Enter Email"),
+const validationSchema = Yup.object().shape({
+    productName: Yup.string().required('Product Name is required'),
+    category: Yup.string().required('Category is required'),
+    price: Yup.number()
+        .required('Price is required')
+        .positive('Price must be positive'),
+    discount: Yup.number().positive('Discount must be positive'),
+    productImage: Yup.mixed().required('Product Image is required'),
+});
 
-        price: yup.string()
-            .required("Please Enter a Price")
-            .matches(
-                /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/,
-                "Please Enter a Positive"
-            ),
-        phone: yup.string()
-            .required("Please Enter Phone Number")
-            .matches(/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/, "Please Enter Valid Phone Number")
-            .typeError("Only Digit Number Allowed"),
-        file: yup.mixed()
-            .required("Please Enter File"),
+function FormSubmition() {
+    const [step, setStep] = useState(1);
 
-    })
+    const initialValues = {
+        productName: '',
+        category: '',
+        price: '',
+        discount: '',
+        productImage: null,
+    };
 
+    const handleNextStep = () => {
+        if (step < 3) {
+            setStep(step + 1);
+        }
+    };
 
-    const { handleSubmit, handleChange, handleBlur, values, errors, touched } = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            price: '',
-            phone: '',
-            file: ''
-        },
-        onSubmit: values => {
-            console.log(values);
-
-        },
-
-        validationSchema: SubmitionFormschema
-    })
-
-    console.log(errors);
-
-
-    const handlePrevious = () => {
-        console.log("handlePrevious");
-
-
-    }
-
-    const handleNext = () => {
-        console.log("handleNext");
-
-    }
-
+    const handlePreviousStep = () => {
+        setStep(step - 1);
+    };
 
     return (
+        <div>
+            <h1>Product Submission Form - Step {step}</h1>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={(values, actions) => {
+                    // Simulate API call here (e.g., using setTimeout)
+                    setTimeout(() => {
+                        alert('Form submitted successfully');
+                        actions.setSubmitting(false);
+                    }, 1000);
+                }}
+            >
 
-        <div className='container'>
-            <br></br>
-            <h2>Form Submition:</h2>
-            <br></br>
+                {({ isSubmitting, values, errors, touched }) => (
+                    <Form>
+                        <div>
+                            {step === 1 && (
+                                <div>
+                                    <label htmlFor="productName">Product Name</label>
+                                    <Field type="text" name="productName" />
+                                    <ErrorMessage name="productName" component="div" />
+                                    <label htmlFor="category">Category</label>
+                                    <Field as="select" name="category">
+                                        <option value="" label="Select a category" />
+                                        {categoryOptions.map((option) => (
+                                            <option key={option} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </Field>
+                                    <ErrorMessage name="category" component="div" />
+                                </div>
+                            )}
 
+                            {step === 2 && (
+                                <div>
+                                    <label htmlFor="price">Price</label>
+                                    <Field type="number" name="price" />
+                                    <ErrorMessage name="price" component="div" />
+                                    <label htmlFor="discount">Discount (optional)</label>
+                                    <Field type="number" name="discount" />
+                                    <ErrorMessage name="discount" component="div" />
+                                </div>
+                            )}
 
+                            {step === 3 && (
+                                <div>
+                                    <label htmlFor="productImage">Product Image</label>
+                                    <Field
+                                        type="file"
+                                        name="productImage"
+                                        accept="image/*"
+                                    // onChange={(event) => {
+                                    //   setFieldValue('productImage', event.currentTarget.files[0]);
+                                    // }}
+                                    />
+                                    <ErrorMessage name="productImage" component="div" />
+                                </div>
+                            )}
 
-            <form onSubmit={handleSubmit}>
+                            <div>
+                                {step > 1 && (
+                                    <button type="button" onClick={handlePreviousStep}>
+                                        Previous
+                                    </button>
+                                )}
+                                {step < 3 && (
+                                    <button
+                                        type="button"
+                                        onClick={handleNextStep}
+                                        disabled={
+                                            (step === 1 &&
+                                                (!values.productName || !values.category)) ||
+                                            (step === 2 && (!values.price || !values.discount))
+                                        }
+                                    >
+                                        Next
+                                    </button>
+                                )}
+                                {step === 3 && (
+                                    <button type="submit" disabled={isSubmitting}>
+                                        Submit
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </Form>
+                )}
 
-                <>
-                    <span>Name:</span>
-                    <input
-                        name="name"
-                        id="name"
-                        placeholder="Enter Name"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.name}
-                    />
-                    {errors.name && touched.name ? <span>{errors.name}</span> : null}
-                    <br></br><br></br>
-                    <span>Email:</span>
-
-                    <input
-                        name="email"
-                        id="email"
-                        placeholder="Enter Email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.email}
-                    />
-                    {errors.email && touched.email ? <span>{errors.email}</span> : null}
-
-                    <br></br><br></br>
-
-
-                    <button onClick={handlePrevious} disabled={true}>Previous</button>
-                    <button onClick={handleNext} disabled={false}>Next</button>
-
-                </>
-
-            </form>
-
-
-
-            {/* <>
-                <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    placeholder="Enter Price"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.price}
-                />
-                {errors.price && touched.price ? <span>{errors.price}</span> : null}
-
-
-                <input
-                    type="tel"
-                    className="form-control"
-                    name="phone"
-                    id="phone"
-                    placeholder="Your Phone"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.phone}
-                />
-                {errors.phone && touched.phone ? <span>{errors.phone}</span> : null}
-
-
-                <input
-                    type="file"
-                    name="file"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.file}
-                />
-                {errors.file && touched.file ? <span>{errors.file}</span> : null}
-            </> */}
-
-
-
-            <br></br>
+            </Formik>
         </div>
     );
 }
