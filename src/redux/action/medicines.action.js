@@ -1,5 +1,5 @@
 import { API_URL } from "../../Utils/baseURL";
-import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 
 export const addMedicines = (data) => (dispatch) => {
@@ -43,10 +43,14 @@ export const updateMedicine = (data) => (dispatch) => {
 
 export const getMedicine = () => (dispatch) => {
     try {
-        fetch(API_URL + "medicines")
-            .then(response => response.json())
-            .then(data => dispatch({ type: GET_MEDICINES, payload: data }))
-            .catch(error => console.log(error))
+        dispatch(loadingMedicine())
+        setTimeout(() => {
+            fetch(API_URL + "medicines")
+                .then(response => response.json())
+                .then(data => dispatch({ type: GET_MEDICINES, payload: data }))
+                .catch(error => console.log(error))
+        }, 4000)
+
     } catch (error) {
         console.log(error);
     }
@@ -67,3 +71,7 @@ export const deleteMedicine = (id) => (dispatch) => {
     }
 }
 
+
+export const loadingMedicine = () => (dispatch) => {
+    dispatch({ type: LOADING_MEDICINES })
+}

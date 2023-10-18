@@ -38,12 +38,6 @@
   ],
   "department": [
     {
-      "id": 1,
-      "name": "Hiprex",
-      "sort_desc": "fiudsifub fiusdfiugdfgfdg",
-      "long_desc": "jdhigi kfbsdubfusbf fsdufusdbf fsbduifbsiufbisfubsi gdfgfdg"
-    },
-    {
       "id": 2,
       "name": "jaimishXYZA",
       "sort_desc": "fiudsifub fiusdfiu",
@@ -54,6 +48,18 @@
       "sort_desc": "fgfdgffdfsdffsd",
       "long_desc": "ffsdfsdfsdfsdfsfsf fsdfsdfsdfsfsfs fsfsdfsdfsdf",
       "id": 3
+    },
+    {
+      "name": "Jaimish",
+      "sort_desc": "fgfdgffdfsdffsd",
+      "long_desc": "ffsdfsdfsdfsdfsfsf fsdfsdfsdfsfsfs fsfsdfsdfsdf",
+      "id": 4
+    },
+    {
+      "name": "DipaKamal",
+      "sort_desc": "fgfdgffdfsdffsd",
+      "long_desc": "ffsdfsdfsdfsdfsfsf fsdfsdfsdfsfsfs fsfsdfsdfsdf",
+      "id": 5
     }
   ]
 }

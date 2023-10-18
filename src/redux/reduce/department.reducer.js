@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const departmentReducer = (state = initialState, action) => {
-    console.log(action);
+    console.log(state, action);
 
     switch (action.type) {
         case GET_DEPARTMENT:

@@ -4,6 +4,7 @@ import { ADD_DEPARTMENT, DELETE_DEPARTMENT, GET_DEPARTMENT, UPDATE_DEPARTMENT } 
 export const getDepartment = () => (dispatch) => {
     try {
         fetch(API_URL + "department")
+            .then(response => response.json())
             .then(data => dispatch({ type: GET_DEPARTMENT, payload: data }))
             .then(error => console.log(error))
             .catch(error => console.log(error))

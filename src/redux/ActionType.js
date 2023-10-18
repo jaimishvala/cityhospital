@@ -18,3 +18,7 @@ export const DELETE_DEPARTMENT = "DELETE_DEPARTMENT"
 export const UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT"
 
 /********************************************************** */
+
+export const LOADING_MEDICINES = "LOADING_MEDICINES"
+/************************************************************ */
+export const ERROR_MEDICINES = "ERROR_MEDICINES"

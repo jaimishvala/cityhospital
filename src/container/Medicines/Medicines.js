@@ -6,6 +6,11 @@ import { Button } from '@mui/material';
 import { Title } from '@mui/icons-material';
 import Card from '../../components/UI/Card/Card';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMedicine } from '../../redux/action/medicines.action';
+import { LOADING_MEDICINES } from '../../redux/ActionType';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 function Medicines({ increment }) {
 
@@ -78,17 +83,23 @@ function Medicines({ increment }) {
     const [sort, setSort] = useState("")
     const [fav, setFav] = useState([])
 
-    // console.log(adminMedicine);
 
-    const getData = () => {
-        let localData = JSON.parse(localStorage.getItem("medicines"));
-        console.log(localData);
+    const dispatch = useDispatch()
 
-        setadminMedicine(localData)
-    }
+    const medicines = useSelector(state => state.medicines)
+    console.log(medicines.medicines);
+
+
+    // const getData = () => {
+    //     let localData = JSON.parse(localStorage.getItem("medicines"));
+    //     console.log(localData);
+
+    //     setadminMedicine(localData)
+    // }
 
     useEffect(() => {
-        getData()
+        // getData()
+        dispatch(getMedicine())
     }, [])
 
     const handleAddCart = () => {
@@ -153,43 +164,44 @@ function Medicines({ increment }) {
             <br></br>
 
             {
-                <>
-                    <input onChange={(event) => setSearch(event.target.value)} placeholder='Searching...' />
+                // <>
+                //     <input onChange={(event) => setSearch(event.target.value)} placeholder='Searching...' />
 
-                    <select onChange={(event) => setSort(event.target.value)}>
-                        <option value="0">--Select---</option>
-                        <option value="az">A To Z</option>
-                        <option value="za">Z TO A</option>
-                        <option value="lh">Low To High</option>
-                        <option value="hl">High To Low</option>
-                    </select>
+                //     <select onChange={(event) => setSort(event.target.value)}>
+                //         <option value="0">--Select---</option>
+                //         <option value="az">A To Z</option>
+                //         <option value="za">Z TO A</option>
+                //         <option value="lh">Low To High</option>
+                //         <option value="hl">High To Low</option>
+                //     </select>
 
 
-                </>
+                // </>
             }
 
             <br></br><br></br>
 
             <div className='row'>
                 {
-                    finalData.map((v) => {
+                    medicines.isLoading ? <CircularProgress /> :
+                        medicines.medicines.map((v) => {
 
-                        return (
-                            <div className='col-lg-3'>
-                                <Card
-                                    title={v.name}
-                                    SubTitle={v.price}
-                                    btnValue="Add To Cart"
-                                    btnClick={() => handleAddCart(v.id)}
-                                    favclick={() => handleFavoritebar(v.id)}
-                                    favStatus={fav.includes(v.id) ? true : false}
-                                />
-                                <br></br><br></br>
-                            </div>
+                            return (
+                                <div className='col-lg-3'>
+                                    <Card
+                                        title={v.name}
+                                        SubTitle={v.price}
+                                        btnValue="Add To Cart"
+                                        btnClick={() => handleAddCart(v.id)}
+                                        favclick={() => handleFavoritebar(v.id)}
+                                        favStatus={fav.includes(v.id) ? true : false}
+                                    />
+                                    <br></br><br></br>
+                                </div>
 
-                        )
+                            )
 
-                    })
+                        })
                 }
 
 
