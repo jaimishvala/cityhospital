@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import MedicineForm from './MedicineForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMedicine } from '../../../redux/action/medicines.action';
+import { addMedicines, deleteMedicine, getMedicine, updateMedicine } from '../../../redux/action/medicines.action';
 
 
 
@@ -41,21 +41,24 @@ export default function Medicine() {
 
         if (localData) {
             if (update) {
+                dispatch(updateMedicine(data))
                 //Update
-                let index = localData.findIndex((v) => v.id === data.id)
-                // console.log(index);
+                // let index = localData.findIndex((v) => v.id === data.id)
+                // // console.log(index);
 
-                localData[index] = data
+                // localData[index] = data
 
-                localStorage.setItem("medicines", JSON.stringify(localData))
-                setMdata(localData)
+                // localStorage.setItem("medicines", JSON.stringify(localData))
+                // setMdata(localData)
 
-                setUpdate(false)
+                // setUpdate(false)
             } else {
+                dispatch(addMedicines(data))
                 //Add
-                localData.push({ id: id, ...data })
-                localStorage.setItem("medicines", JSON.stringify(localData))
-                setMdata(localData)
+                // localData.push({ id: id, ...data })
+                // localStorage.setItem("medicines", JSON.stringify(localData))
+                // setMdata(localData)
+
             }
 
 
@@ -63,20 +66,23 @@ export default function Medicine() {
             localStorage.setItem("medicines", JSON.stringify([{ id, ...data }]))
             setMdata(localData)
         }
+
+        setUpdate(false)
     }
 
 
 
     const handleDelet = (id) => {
-        // console.log(id);
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        console.log(id);
+        // let localData = JSON.parse(localStorage.getItem("medicines"));
 
-        let fdata = localData.filter((v) => v.id !== id)
-        console.log(fdata);
+        // let fdata = localData.filter((v) => v.id !== id)
+        // console.log(fdata);
 
-        localStorage.setItem("medicines", JSON.stringify(fdata))
+        // localStorage.setItem("medicines", JSON.stringify(fdata))
 
-        setMdata(fdata)
+        // setMdata(fdata)
+        dispatch(deleteMedicine(id))
     }
 
     const handleEdit = (data) => {

@@ -20,6 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -104,7 +105,8 @@ export default function Layout({ children }) {
 
     const iconItems = [
         { label: "Medicines", icon: <MedicalServicesIcon />, to: "/Admin/Medicines/" },
-        { label: "Doctor", icon: <LocalHospitalIcon />, to: "/Admin/Doctor/" }
+        { label: "Doctor", icon: <LocalHospitalIcon />, to: "/Admin/Doctor/" },
+        { label: "Department", icon: <LocalFireDepartmentIcon />, to: "/Admin/Department/" }
     ]
 
     return (
