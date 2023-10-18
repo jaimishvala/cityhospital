@@ -6,7 +6,7 @@ import Doctor from '../Admin/Container/Doctor/Doctor';
 import Department from '../Admin/Department/Department';
 
 
-function AdminRoute(props) {    
+function AdminRoute(props) {
     return (
         <>
             <Layout>
