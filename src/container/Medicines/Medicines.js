@@ -7,9 +7,12 @@ import { Title } from '@mui/icons-material';
 import Card from '../../components/UI/Card/Card';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMedicine } from '../../redux/action/medicines.action';
+import { errorMedicine, getMedicine } from '../../redux/action/medicines.action';
 import { LOADING_MEDICINES } from '../../redux/ActionType';
 import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
+
 
 
 function Medicines({ increment }) {
@@ -77,7 +80,6 @@ function Medicines({ increment }) {
     // const [Medicines, setMedicines] = useState([])
     // const [filterData, setFilterData] = useState([])
 
-
     const [adminMedicine, setadminMedicine] = useState([])
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState("")
@@ -87,7 +89,7 @@ function Medicines({ increment }) {
     const dispatch = useDispatch()
 
     const medicines = useSelector(state => state.medicines)
-    console.log(medicines.medicines);
+    console.log(medicines);
 
 
     // const getData = () => {
@@ -175,34 +177,55 @@ function Medicines({ increment }) {
                 //         <option value="hl">High To Low</option>
                 //     </select>
 
-
                 // </>
             }
 
             <br></br><br></br>
 
+
+            {/* <React.Fragment>
+                {hasError && <p>Something went wrong.</p>}
+                {isLoading ? (
+                    <p>Loading ...</p>
+                ) : (
+                    <ul>
+                        {data.map(item => (
+                            <li key={item.ObjectId}>
+                                <a href={item.url}>{item.title}</a>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </React.Fragment> */}
+
             <div className='row'>
                 {
-                    medicines.isLoading ? <CircularProgress /> :
-                        medicines.medicines.map((v) => {
+                    medicines.isLoading ?
+                        <Box sx={{ display: 'flex' }}>
+                            <CircularProgress color="secondary" />
+                        </Box> :
+                        medicines.error ? <p>{medicines.error}</p> :
+                            medicines.medicines.map((v) => {
 
-                            return (
-                                <div className='col-lg-3'>
-                                    <Card
-                                        title={v.name}
-                                        SubTitle={v.price}
-                                        btnValue="Add To Cart"
-                                        btnClick={() => handleAddCart(v.id)}
-                                        favclick={() => handleFavoritebar(v.id)}
-                                        favStatus={fav.includes(v.id) ? true : false}
-                                    />
-                                    <br></br><br></br>
-                                </div>
+                                return (
+                                    <div className='col-lg-3'>
+                                        <Card
+                                            title={v.name}
+                                            SubTitle={v.price}
+                                            btnValue="Add To Cart"
+                                            btnClick={() => handleAddCart(v.id)}
+                                            favclick={() => handleFavoritebar(v.id)}
+                                            favStatus={fav.includes(v.id) ? true : false}
+                                        />
+                                        <br></br><br></br>
+                                    </div>
 
-                            )
+                                )
 
-                        })
+                            })
                 }
+
+
 
 
                 {/* {
