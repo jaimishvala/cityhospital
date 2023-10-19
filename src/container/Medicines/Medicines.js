@@ -91,6 +91,9 @@ function Medicines({ increment }) {
     const medicines = useSelector(state => state.medicines)
     console.log(medicines);
 
+    const cart = useSelector(state => state.cart)
+    console.log(cart);
+
 
     // const getData = () => {
     //     let localData = JSON.parse(localStorage.getItem("medicines"));
