@@ -110,8 +110,8 @@ function Home(props) {
                     <div className="section-title"><Section>Reviews</Section></div>
 
 
-                        <Review />
-                
+                    <Review />
+
 
                     <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="swiper-wrapper">

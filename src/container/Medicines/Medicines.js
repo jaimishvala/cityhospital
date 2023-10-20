@@ -11,6 +11,7 @@ import { errorMedicine, getMedicine } from '../../redux/action/medicines.action'
 import { LOADING_MEDICINES } from '../../redux/ActionType';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { addTOCart } from '../../redux/action/cart.action';
 
 
 
@@ -107,9 +108,11 @@ function Medicines({ increment }) {
         dispatch(getMedicine())
     }, [])
 
-    const handleAddCart = () => {
+    const handleAddCart = (id) => {
         console.log("dsfdsf");
-        increment((prev) => prev + 1)
+        // increment((prev) => prev + 1)
+
+        dispatch(addTOCart(id))
     }
 
     const handleFavoritebar = (id) => {

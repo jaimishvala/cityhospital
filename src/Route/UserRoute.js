@@ -17,6 +17,7 @@ import Medicines from '../container/Medicines/Medicines';
 import MedicinesUser from '../container/Medicines/MedicinesUser';
 import FormSubmition from '../container/Appointment/FormSubmition';
 import Counter from '../container/Counter/Counter';
+import AddToCart from '../components/AddToCart/AddToCart';
 
 
 function UserRoute(props) {
@@ -42,6 +43,7 @@ function UserRoute(props) {
 
                 <Route exact path='/MedicinesUser/:id' element={<MedicinesUser />} />
 
+                <Route exact path='/AddToCart' element={<AddToCart />} />
 
                 <Route exact path="/About" element={<Product />} />
                 <Route exact path="/Contact" element={<Contact />} />

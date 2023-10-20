@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 
 function Header({ countCart, fav }) {
     const c1 = useSelector(state => state.counter)
+    const cart = useSelector(state => state.cart)
+
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -40,9 +42,16 @@ function Header({ countCart, fav }) {
                             </StyledBadge>
                         </IconButton>
 
-                        <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={c1.count} color="secondary">
+                        {/* <IconButton aria-label="cart">
+                            <StyledBadge badgeContent={c1.countCart} color="secondary">
                                 <ShoppingCartIcon />
+                            </StyledBadge>
+                        </IconButton> */}
+
+                        <IconButton aria-label="cart">
+                            <StyledBadge badgeContent={cart.id} color="secondary">
+
+                                <NavLink className={({ isActive }) => isActive ? "nav-link scrollto active" : "nav-link scrollto"} to="/AddToCart"> <ShoppingCartIcon /></NavLink>
                             </StyledBadge>
                         </IconButton>
 
