@@ -25,3 +25,7 @@ export const ERROR_MEDICINES = "ERROR_MEDICINES"
 
 /********************************************************** */
 export const ADD_TO_CART = "ADD_TO_CART"
+
+export const INCRMENT_QTY = "INCRMENT_QTY"
+export const DECRMENT_QTY = "DECRMENT_QTY"
+export const REMOVE_LINE = "REMOVE_LINE"

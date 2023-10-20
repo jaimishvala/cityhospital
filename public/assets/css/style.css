@@ -97,7 +97,7 @@ body {
   animation-fill-mode: forwards;
 }
 
-@keyframes animate {
+/* @keyframes animate {
   0% {
     background-position: left;
   }
@@ -109,7 +109,7 @@ body {
   100% {
     background-position: right;
   }
-}
+} */
 
 .image {
   margin-right: 50px;
@@ -186,7 +186,7 @@ input:focus {
 }
 
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .shopping-cart {
     width: 100%;
     height: auto;
@@ -214,7 +214,7 @@ input:focus {
   .buttons {
     margin-right: 1000px;
   }
-}
+} */
 
 
 
