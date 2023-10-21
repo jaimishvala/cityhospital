@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementCart, incrementCart } from '../../redux/action/cart.action';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function AddToCart(props) {
 
@@ -21,7 +22,8 @@ function AddToCart(props) {
     console.log(cartData);
 
 
-
+    let total = cartData.reduce((acc, v) => acc + (v.price * v.qty), 0)
+    console.log(total);
 
     const handleIncrement = (id) => {
         // console.log(id);
@@ -35,8 +37,9 @@ function AddToCart(props) {
         dispatch(decrementCart(id))
     }
 
+
     return (
-        <div>
+        <div className='container'>
             <div className="shopping-cart">
                 <div className="title">
                     Medicine Bag
@@ -55,27 +58,35 @@ function AddToCart(props) {
                                 </div>
                                 <div className="description">
                                     <span>{v.name}</span>
-                                    {/* <span>{v.message}</span> */}
                                 </div>
                                 <div className="quantity">
                                     <button className="plus-btn" type="button" name="button" onClick={() => handleIncrement(v.id)}>
                                         +
                                     </button>
-                                    {/* <input type="text" name="name" defaultValue={v.qty} /> */}
+
                                     <span>{v.qty}</span>
                                     <button className="minus-btn" type="button" name="button" onClick={() => handleDecrement(v.id)}>
                                         -
                                     </button>
                                 </div>
                                 <div className="total-price">${v.price * v.qty}</div>
-                                
+
+
+                                <div className='delete'>
+                                    <DeleteIcon />
+                                </div>
+
                             </div>
+
+
                         )
 
                     })
                 }
 
-
+                <>
+                    <span className='span'>Total:{total}</span>
+                </>
 
             </div>
         </div>

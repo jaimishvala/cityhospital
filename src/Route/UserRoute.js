@@ -17,7 +17,8 @@ import Medicines from '../container/Medicines/Medicines';
 import MedicinesUser from '../container/Medicines/MedicinesUser';
 import FormSubmition from '../container/Appointment/FormSubmition';
 import Counter from '../container/Counter/Counter';
-import AddToCart from '../components/AddToCart/AddToCart';
+import AddToCart from '../container/AddToCart/AddToCart';
+
 
 
 function UserRoute(props) {

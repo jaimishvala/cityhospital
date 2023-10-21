@@ -8,17 +8,15 @@ import Card from '../../components/UI/Card/Card';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch, useSelector } from 'react-redux';
 import { errorMedicine, getMedicine } from '../../redux/action/medicines.action';
-import { LOADING_MEDICINES } from '../../redux/ActionType';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { addTOCart } from '../../redux/action/cart.action';
 
 
 
-
 function Medicines({ increment }) {
 
-    // const MedicinesData = [
+    // const MedicinesData = [  
     //     {
     //         "id": 1,
     //         "name": "Naproxen",

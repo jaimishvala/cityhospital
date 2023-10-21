@@ -28,6 +28,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.delete {
+  cursor: pointer;
+  margin-top: 23px;
+}
+
+
+.span {
+  text-align: center;
+  margin-top: 50px
+}
+
 .shopping-cart {
   width: 750px;
   height: 423px;

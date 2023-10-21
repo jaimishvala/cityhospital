@@ -10,6 +10,9 @@ export const ADD_MEDICINES = "ADD_MEDICINES"
 export const DELETE_MEDICINES = "DELETE_MEDICINES"
 export const UPDATE_MEDICINES = "UPDATE_MEDICINES"
 
+export const LOADING_MEDICINES = "LOADING_MEDICINES"
+export const ERROR_MEDICINES = "ERROR_MEDICINES"
+
 /**********************DEPARTMENT****************** */
 
 export const GET_DEPARTMENT = "GET_DEPARTMENT"
@@ -17,15 +20,9 @@ export const ADD_DEPARTMENT = "ADD_DEPARTMENT"
 export const DELETE_DEPARTMENT = "DELETE_DEPARTMENT"
 export const UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT"
 
-/********************************************************** */
+/************************AddToCart************************* */
 
-export const LOADING_MEDICINES = "LOADING_MEDICINES"
-/************************************************************ */
-export const ERROR_MEDICINES = "ERROR_MEDICINES"
-
-/********************************************************** */
 export const ADD_TO_CART = "ADD_TO_CART"
-
 export const INCRMENT_QTY = "INCRMENT_QTY"
 export const DECRMENT_QTY = "DECRMENT_QTY"
 export const REMOVE_LINE = "REMOVE_LINE"

@@ -3,7 +3,7 @@ import { ADD_MEDICINES, DELETE_MEDICINES, ERROR_MEDICINES, GET_MEDICINES, LOADIN
 
 
 export const addMedicines = (data) => (dispatch) => {
-    // console.log(data);
+    console.log(dispatch);
     try {
         fetch(API_URL + "medicines", {
             method: "POST",
@@ -22,7 +22,7 @@ export const addMedicines = (data) => (dispatch) => {
 
             .catch(error => dispatch(errorMedicine(error)))
     } catch (error) {
-        console.log(error);
+        dispatch(errorMedicine(error))
     }
 }
 
@@ -35,12 +35,17 @@ export const updateMedicine = (data) => (dispatch) => {
                 "Content-Type": "application/json",
             },
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('UpdateMedicine went wrong!')
+            })
             .then((rdata) => dispatch({ type: UPDATE_MEDICINES, payload: rdata }))
-            .catch(error => console.log(error))
+            .catch(error => dispatch(errorMedicine(error)))
 
     } catch (error) {
-        console.log(error);
+        dispatch(errorMedicine(error))
     }
 
 }
@@ -51,11 +56,16 @@ export const deleteMedicine = (id) => (dispatch) => {
         fetch(API_URL + "medicines/" + id, {
             method: "DELETE"
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('DeleteMedicine went wrong!')
+            })
             .then(() => dispatch({ type: DELETE_MEDICINES, payload: id }))
-            .catch(error => console.log(error))
+            .catch(error => dispatch(errorMedicine(error)))
     } catch (error) {
-        console.log(error);
+        dispatch(errorMedicine(error))
     }
 }
 
