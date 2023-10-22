@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementCart, incrementCart } from '../../redux/action/cart.action';
+import { decrementCart, deleteCart, incrementCart } from '../../redux/action/cart.action';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function AddToCart(props) {
@@ -37,6 +37,12 @@ function AddToCart(props) {
         dispatch(decrementCart(id))
     }
 
+    const handleDelete = (id) => {
+        // console.log(id);
+
+        dispatch(deleteCart(id))
+    }
+
 
     return (
         <div className='container'>
@@ -57,7 +63,7 @@ function AddToCart(props) {
                                     <img src="medicine1.jpg" alt />
                                 </div>
                                 <div className="description">
-                                    <span>{v.name}</span>
+                                    <h5>{v.name}</h5>
                                 </div>
                                 <div className="quantity">
                                     <button className="plus-btn" type="button" name="button" onClick={() => handleIncrement(v.id)}>
@@ -65,6 +71,7 @@ function AddToCart(props) {
                                     </button>
 
                                     <span>{v.qty}</span>
+
                                     <button className="minus-btn" type="button" name="button" onClick={() => handleDecrement(v.id)}>
                                         -
                                     </button>
@@ -73,7 +80,7 @@ function AddToCart(props) {
 
 
                                 <div className='delete'>
-                                    <DeleteIcon />
+                                    <DeleteIcon onClick={() => handleDelete(v.id)} />
                                 </div>
 
                             </div>
@@ -85,11 +92,13 @@ function AddToCart(props) {
                 }
 
                 <>
-                    <span className='span'>Total:{total}</span>
+                    <h4 className='span'>Total:{total}</h4>
                 </>
-
             </div>
+
         </div>
+
+
 
     );
 }

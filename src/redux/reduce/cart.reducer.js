@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DECRMENT_QTY, INCRMENT_QTY } from "../ActionType";
+import { ADD_TO_CART, DECRMENT_QTY, INCRMENT_QTY, REMOVE_LINE } from "../ActionType";
 
 const initialState = {
     isLoading: false,
@@ -50,12 +50,18 @@ export const cartReducer = (state = initialState, action) => {
                 state.cart[index2].qty--
             }
 
-
             return {
                 isLoading: false,
                 cart: state.cart,
                 error: null
             }
+
+        case REMOVE_LINE:
+            return {
+                ...state,
+                cart: state.cart.filter((v) => v.id !== action.payload)
+            }
+
 
         default:
             return state
