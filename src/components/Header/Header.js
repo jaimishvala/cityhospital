@@ -25,7 +25,6 @@ function Header({ countCart, fav }) {
     const cartCount = cart.cart.reduce((acc, v) => acc + v.qty, 0)
     console.log(cartCount);
 
-
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -39,12 +38,13 @@ function Header({ countCart, fav }) {
                         {/* 
                         <FavoriteBorderIcon favorite={favorite} /> */}
 
-                        <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={fav} color="secondary">
-                                <FavoriteIcon />
-                            </StyledBadge>
-                        </IconButton>
-
+                        <Link to={"/FavoriteCart"}>
+                            <IconButton aria-label="cart">
+                                <StyledBadge badgeContent={fav.length} color="secondary">
+                                    <FavoriteIcon />
+                                </StyledBadge>
+                            </IconButton>
+                        </Link>
                         {/* <IconButton aria-label="cart">
                             <StyledBadge badgeContent={c1.countCart} color="secondary">
                                 <ShoppingCartIcon />

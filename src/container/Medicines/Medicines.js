@@ -11,10 +11,11 @@ import { errorMedicine, getMedicine } from '../../redux/action/medicines.action'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { addTOCart } from '../../redux/action/cart.action';
+import { addFavoriteCart } from '../../redux/action/favorite.action';
 
 
 
-function Medicines({ increment }) {
+function Medicines({ increment, fav, setFav }) {
 
     // const MedicinesData = [  
     //     {
@@ -82,7 +83,7 @@ function Medicines({ increment }) {
     const [adminMedicine, setadminMedicine] = useState([])
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState("")
-    const [fav, setFav] = useState([])
+    // const [fav, setFav] = useState([])
 
 
     const dispatch = useDispatch()
@@ -92,6 +93,9 @@ function Medicines({ increment }) {
 
     const cart = useSelector(state => state.cart)
     console.log(cart);
+
+    const favorite = useSelector(state => state.favorite)
+    console.log(favorite);
 
 
     // const getData = () => {
@@ -123,6 +127,8 @@ function Medicines({ increment }) {
         } else {
             setFav((prev) => [...prev, id])
         }
+
+        dispatch(addFavoriteCart(id))
 
     }
     console.log(fav);

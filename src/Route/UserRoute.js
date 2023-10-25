@@ -18,6 +18,7 @@ import MedicinesUser from '../container/Medicines/MedicinesUser';
 import FormSubmition from '../container/Appointment/FormSubmition';
 import Counter from '../container/Counter/Counter';
 import AddToCart from '../container/Cart/AddToCart';
+import FavoriteCart from '../container/Cart/FavoriteCart';
 
 
 function UserRoute(props) {
@@ -42,6 +43,8 @@ function UserRoute(props) {
                 <Route exact path='/Medicine' element={<Medicines increment={setCountCart} fav={fav} setFav={setFav} />} />
 
                 <Route exact path='/MedicinesUser/:id' element={<MedicinesUser />} />
+
+                <Route exact path='/FavoriteCart' element={<FavoriteCart />} />
 
                 <Route exact path='/AddToCart' element={<AddToCart />} />
 
