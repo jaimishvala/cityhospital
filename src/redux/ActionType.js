@@ -12,6 +12,11 @@ export const UPDATE_MEDICINES = "UPDATE_MEDICINES"
 
 export const LOADING_MEDICINES = "LOADING_MEDICINES"
 export const ERROR_MEDICINES = "ERROR_MEDICINES"
+/**********************DOCTOR********************* */
+export const GET_DOCTOR = "GET_DOCTOR"
+export const ADD_DOCTOR = "ADD_DOCTOR"
+export const DELETE_DOCTOR = "DELETE_DOCTOR"
+export const UPDATE_DOCTOR = "UPDATE_DOCTOR"
 
 /**********************DEPARTMENT****************** */
 

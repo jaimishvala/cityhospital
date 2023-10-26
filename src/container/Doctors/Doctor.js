@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Heading4, Section } from '../../components/UI/Heading/Heading';
 import { Main, P, P2, Span1 } from '../../components/UI/TextArea/TextArea';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDoctor } from '../../redux/action/doctor.action';
+import Card from '../../components/UI/Card/Card';
 
 function Doctor(props) {
+    const doctor = useSelector(state => state.doctor)
+    console.log(doctor);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getDoctor())
+    }, [])
     return (
+
         <Main>
-            <section id="doctors" className="doctors">
+            <section id="doctors" className="doctors">  
                 <div className="container">
                     <div className="section-title">
                         <Section>Doctors</Section>
@@ -81,7 +92,29 @@ function Doctor(props) {
                     </div>
                 </div>
             </section>
+            <div className='container'>
+                <div className='row'>
+                    {
+                        doctor.doctor.map((v) => {
+                            return (
+                                <div className='col-lg-3'>
+                                    <Card
+                                        title={v.name}
+                                        SubTitle={v.desc}
+                                    />
+                                    <br></br><br></br>
+                                    {/* <h3>{v.name}</h3>
+                                    <span>{v.desc}</span> */}
+                                </div>
+
+                            )
+                        })
+                    }
+                </div>
+            </div>
         </Main>
+
+
 
     );
 }

@@ -6,20 +6,28 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import DoctorForm from './DoctorForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDoctor, deleteDoctor, getDoctor, updateDoctor } from '../../../redux/action/doctor.action';
 
 
 export default function Doctor() {
     const [mdata, setMdata] = useState([])
     const [update, setUpdate] = useState(false)
 
-    // console.log(mdata);
+    console.log(mdata);
+
+    const doctor = useSelector(state => state.doctor)
+    console.log(doctor);
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("doctor"));
+        dispatch(getDoctor())
+        // let localData = JSON.parse(localStorage.getItem("doctor"));
 
-        if (localData) {
-            setMdata(localData)
-        }
+        // if (localData) {
+        //     setMdata(localData)
+        // }
     }, [])
 
 
@@ -33,28 +41,30 @@ export default function Doctor() {
 
         if (localData) {
             if (update) {
+                dispatch(updateDoctor(data))
                 //update
-                let index = localData.findIndex((v) => v.id === data.id)
-                console.log(index);
+                // let index = localData.findIndex((v) => v.id === data.id)
+                // console.log(index);
 
-                localData[index] = data
+                // localData[index] = data
 
-                localStorage.setItem("doctor", JSON.stringify(localData))
-                setMdata(localData)
+                // localStorage.setItem("doctor", JSON.stringify(localData))
+                // setMdata(localData)
 
-                setUpdate(false)
+                // setUpdate(false)
             } else {
+                dispatch(addDoctor(data))
                 //add
-                localData.push({ id: id, ...data })
-                localStorage.setItem("doctor", JSON.stringify(localData))
-                setMdata(localData)
+                // localData.push({ id: id, ...data })
+                // localStorage.setItem("doctor", JSON.stringify(localData))
+                // setMdata(localData)
             }
 
         } else {
             localStorage.setItem("doctor", JSON.stringify([{ id, ...data }]))
             setMdata(localData)
         }
-
+        setUpdate(false)
     }
 
 
@@ -92,14 +102,15 @@ export default function Doctor() {
     // }
 
     const handleDelet = (id) => {
-        let localData = JSON.parse(localStorage.getItem("doctor"));
+        dispatch(deleteDoctor(id))
+        // let localData = JSON.parse(localStorage.getItem("doctor"));
 
-        let fdata = localData.filter((v) => v.id !== id)
-        console.log(fdata);
+        // let fdata = localData.filter((v) => v.id !== id)
+        // console.log(fdata);
 
-        localStorage.setItem("doctor", JSON.stringify(fdata))
+        // localStorage.setItem("doctor", JSON.stringify(fdata))
 
-        setMdata(fdata)
+        // setMdata(fdata)
     }
 
     const handleEdit = (data) => {
@@ -141,7 +152,7 @@ export default function Doctor() {
             <div style={{ height: 400, width: '100%' }}>
 
                 <DataGrid
-                    rows={mdata}
+                    rows={doctor.doctor}
                     columns={columns}
                     initialState={{
                         pagination: {

@@ -68,5 +68,42 @@
       "long_desc": "ffsdfsdfsdfsdfsfsf fsdfsdfsdfsfsfs fsfsdfsdfsdf",
       "id": 5
     }
+  ],
+  "doctor": [
+    {
+      "id": 1,
+      "name": "jaimish",
+      "desc": "jadsnf sdfsdf fsdf fsdfsd fsdf fdsf fdfd fdf",
+      "designation": "jay",
+      "profile_url": "www.boy"
+    },
+    {
+      "name": "Nita",
+      "desc": "jadsnf sdfsdf fsdf fsdfsd fsdf fdsf fdfd fdf",
+      "designation": "jaimish",
+      "profile_url": "www.jaimish",
+      "id": 2
+    },
+    {
+      "name": "ff",
+      "desc": "jadsnf sdfsdf fsdf fsdfsd fsdf fdsf fdfd fdf",
+      "designation": "jaimish",
+      "profile_url": "www.jaimish",
+      "id": 3
+    },
+    {
+      "name": "Nita",
+      "desc": "jadsnf sdfsdf fsdf fsdfsd fsdf fdsf fdfd fdf",
+      "designation": "jaimish",
+      "profile_url": "www.jaimish",
+      "id": 4
+    },
+    {
+      "name": "drworld",
+      "desc": "jadsnf sdfsdf fsdf fsdfsd fsdf fdsf fdfd fdf",
+      "designation": "jai",
+      "profile_url": "www.jai",
+      "id": 5
+    }
   ]
 }
