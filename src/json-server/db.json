@@ -29,11 +29,18 @@
       "message": "WEGOVY® (semaglutide) injection 2.4 mg is an injectable prescription medicine that may help adults and children aged ≥12 years with obesity (BMI ≥30 for adults, BMI ≥ 95th percentile for age and sex for children), or some adults with excess weight (BMI ≥27) (overweight) who also have weight-related medical problems to help them lose weight and keep it off. Wegovy® should be used with a reduced calorie meal plan and increased physical activity"
     },
     {
-      "name": "NitaABC",
+      "name": "ABC",
       "price": 200,
       "date": "2023-10-26",
       "message": "jifdhghgfhgfdjfdgiohfdiohgfdhgio  ",
       "id": 7
+    },
+    {
+      "name": "GadarDone",
+      "price": 200,
+      "date": "2023-11-08",
+      "message": "jifdhghgfhgfdjfdgiohfdiohgfdhgio  ",
+      "id": 8
     }
   ],
   "department": [
