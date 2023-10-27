@@ -62,7 +62,7 @@ export const deleteMedicine = (id) => (dispatch) => {
     console.log(id);
     try {
         deleteMedicineData(id)
-            .then((response) => dispatch({ type: DELETE_MEDICINES, payload: response.id }))
+            .then(() => dispatch({ type: DELETE_MEDICINES, payload: id }))
             .catch(error => dispatch(errorMedicine(error)))
         // fetch(API_URL + "medicines/" + id, {
         //     method: "DELETE"
