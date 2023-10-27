@@ -29,7 +29,7 @@ export const addDoctor = (data) => (dispatch) => {
 export const deleteDoctor = (id) => (dispatch) => {
     try {
         deleteDoctorData(id)
-            .then((response) => dispatch({ type: DELETE_DOCTOR, payload: response.id }))
+            .then(dispatch({ type: DELETE_DOCTOR, payload: id }))
             .catch(error => console.log(error))
     } catch (error) {
         console.log(error);
