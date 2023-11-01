@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementCart, deleteCart, incrementCart } from '../../redux/action/cart.action';
+// import { decrementCart, deleteCart ,incrementCart} from '../../redux/action/cart.action';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { decrementCart, deleteCart, incrementCart } from '../../redux/slice/cart.slice';
 
 function AddToCart(props) {
 

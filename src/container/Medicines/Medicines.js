@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { errorMedicine, getMedicine } from '../../redux/action/medicines.action';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { addTOCart } from '../../redux/action/cart.action';
+// import { addTOCart } from '../../redux/action/cart.action';
 import { addFavoriteCart } from '../../redux/action/favorite.action';
-
+import { addTOCart } from '../../redux/slice/cart.slice';
 
 
 function Medicines({ increment, fav, setFav }) {
@@ -114,7 +114,7 @@ function Medicines({ increment, fav, setFav }) {
         console.log("dsfdsf");
         // increment((prev) => prev + 1)
 
-        dispatch(addTOCart(id))
+        dispatch(addTOCart({ id: id, qty: 1 }))
     }
 
     const handleFavoritebar = (id) => {
