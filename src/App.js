@@ -4,21 +4,24 @@ import AdminRoute from "./Route/AdminRoute";
 import PrivateRoute from "./Route/PrivateRoute";
 import { configureStore } from "./redux/store";
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react'
 
 function App() {
-  let store = configureStore()
+  let {store,persistor} = configureStore()
 
   return (
     <>
       <Provider store={store}>
-        <Routes>
-          <Route path="/*" element={<UserRoute />} />
+        <PersistGate loading={null} persistor={persistor}>
+          <Routes>
+            <Route path="/*" element={<UserRoute />} />
 
-          <Route element={<PrivateRoute />}>
-            <Route path="/Admin/*" element={<AdminRoute />} />
-          </Route>
+            <Route element={<PrivateRoute />}>
+              <Route path="/Admin/*" element={<AdminRoute />} />
+            </Route>
 
-        </Routes>
+          </Routes>
+        </PersistGate>
       </Provider>
 
     </>
