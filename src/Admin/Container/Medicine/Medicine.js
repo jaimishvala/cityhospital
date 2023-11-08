@@ -7,7 +7,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import MedicineForm from './MedicineForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMedicines, deleteMedicine, getMedicine, updateMedicine } from '../../../redux/action/medicines.action';
+import { addMedicines, updateMedicine } from '../../../redux/action/medicines.action';
+import { deleteMedicine, getMedicine } from '../../../redux/slice/medicines.slice';
 
 
 

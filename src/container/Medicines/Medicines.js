@@ -7,12 +7,13 @@ import { Title } from '@mui/icons-material';
 import Card from '../../components/UI/Card/Card';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch, useSelector } from 'react-redux';
-import { errorMedicine, getMedicine } from '../../redux/action/medicines.action';
+import { errorMedicine } from '../../redux/action/medicines.action';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 // import { addTOCart } from '../../redux/action/cart.action';
 import { addFavoriteCart } from '../../redux/action/favorite.action';
 import { addTOCart } from '../../redux/slice/cart.slice';
+import { getMedicine } from '../../redux/slice/medicines.slice';
 
 
 function Medicines({ increment, fav, setFav }) {
@@ -137,30 +138,30 @@ function Medicines({ increment, fav, setFav }) {
 
     const handlesearchsort = () => {
 
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        // let localData = JSON.parse(localStorage.getItem("medicines"));
 
-        let fdata = localData.filter((v) => {
-            return (
-                v.name.toLowerCase().includes(search.toLowerCase()) ||
-                v.price.toString().includes(search.toString()) ||
-                v.message.toLowerCase().includes(search.toLowerCase()) ||
-                v.date.toLowerCase().includes(search.toLowerCase())
-            )
-        })
+        // let fdata = localData.filter((v) => {
+        //     return (
+        //         v.name.toLowerCase().includes(search.toLowerCase()) ||
+        //         v.price.toString().includes(search.toString()) ||
+        //         v.message.toLowerCase().includes(search.toLowerCase()) ||
+        //         v.date.toLowerCase().includes(search.toLowerCase())
+        //     )
+        // })
 
-        fdata = fdata.sort((a, b) => {
-            if (sort === 'az') {
-                return a.name.localeCompare(b.name);
-            } else if (sort === 'za') {
-                return b.name.localeCompare(a.name);
-            } else if (sort === 'lh') {
-                return a.price - b.price;
-            } else if (sort === 'hl') {
-                return b.price - a.price;
-            }
-        })
+        // fdata = fdata.sort((a, b) => {
+        //     if (sort === 'az') {
+        //         return a.name.localeCompare(b.name);
+        //     } else if (sort === 'za') {
+        //         return b.name.localeCompare(a.name);
+        //     } else if (sort === 'lh') {
+        //         return a.price - b.price;
+        //     } else if (sort === 'hl') {
+        //         return b.price - a.price;
+        //     }
+        // })
 
-        return fdata;
+        // return fdata;
 
     }
 

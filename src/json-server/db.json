@@ -1,13 +1,6 @@
 {
   "medicines": [
     {
-      "id": 3,
-      "name": "Hydrea",
-      "price": 85,
-      "date": 2023,
-      "message": "Hydrea (hydroxyurea) is an antineoplastic (anti-cancer) agent used to treat melanoma, resistant chronic myelocytic leukemia, and recurrent, metastatic, or inoperable carcinoma of the ovary and primary squamous cell (epidermoid) carcinomas of the head and neck."
-    },
-    {
       "id": 4,
       "name": "Hiprex",
       "price": 85,
