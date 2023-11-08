@@ -6,6 +6,7 @@ import counterReducer from "../slice/counter.slice";
 import cartReducer from "../slice/cart.slice";
 import medicinesSlice from "../slice/medicines.slice";
 
+
 export const rootReducer = combineReducers({
    counter: counterReducer,
    medicines: medicinesSlice,

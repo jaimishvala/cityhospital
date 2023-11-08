@@ -16,6 +16,7 @@ import { addTOCart } from '../../redux/slice/cart.slice';
 import { getMedicine } from '../../redux/slice/medicines.slice';
 
 
+
 function Medicines({ increment, fav, setFav }) {
 
     // const MedicinesData = [  

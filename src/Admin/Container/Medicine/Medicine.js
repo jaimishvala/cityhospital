@@ -11,7 +11,6 @@ import { addMedicines, updateMedicine } from '../../../redux/action/medicines.ac
 import { deleteMedicine, getMedicine } from '../../../redux/slice/medicines.slice';
 
 
-
 export default function Medicine() {
     const [mdata, setMdata] = useState([])
     const [update, setUpdate] = useState(false)

@@ -42,7 +42,6 @@ export const deleteMedicine = createAsyncThunk(
     }
 )
 
-
 export const medicinesSlice = createSlice({
     name: "medicines",
     initialState: initialState,
@@ -63,6 +62,5 @@ export const medicinesSlice = createSlice({
         })
     }
 })
-
 
 export default medicinesSlice.reducer;
