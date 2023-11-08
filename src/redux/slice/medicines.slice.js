@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { deleteMedicineData, getMedicineData } from "../../common/api/medicine.api"
+import { addMedicineData, deleteMedicineData, getMedicineData, updateMedicineData } from "../../common/api/medicine.api"
 
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
     medicines: [],
     error: null
 }
+console.log(initialState);
 
 const onLoading = (state, action) => {
     state.isLoading = true;
@@ -42,24 +43,68 @@ export const deleteMedicine = createAsyncThunk(
     }
 )
 
+export const addMedicines = createAsyncThunk(
+    'medicines/post',
+    async (data) => {
+        await addMedicineData(data);
+
+        return data;
+    }
+)
+
+export const updateMedicine = createAsyncThunk(
+    'medicines/put',
+    async (data) => {
+        await updateMedicineData(data);
+
+        return data;
+    }
+)
+
 export const medicinesSlice = createSlice({
     name: "medicines",
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
+        console.log(builder);
+        //isLoading:
         builder.addCase(getMedicine.pending, onLoading)
+
+        //Get Medicines:
         builder.addCase(getMedicine.fulfilled, (state, action) => {
             console.log(action);
             state.medicines = action.payload;
             state.isLoading = false;
             state.error = null;
 
-        })
+        });
+
+        //Error:
         builder.addCase(getMedicine.rejected, onError);
+
+        // Delete Medicines:
         builder.addCase(deleteMedicine.fulfilled, (state, action) => {
             console.log(action);
             state.medicines = state.medicines.filter((v) => v.id !== action.payload);
-        })
+        });
+
+        // Add Medicines:
+        builder.addCase(addMedicines.fulfilled, (state, action) => {
+            console.log(action);
+            state.medicines = state.medicines.concat(action.payload);
+        });
+
+        // Update Medicines:
+        builder.addCase(updateMedicine.fulfilled, (state, action) => {
+            console.log(action);
+            state.medicines = state.medicines.map((v) => {
+                if (v.id === action.payload.id) {
+                    return action.payload;
+                } else {
+                    return v;
+                }
+            });
+        });
     }
 })
 
