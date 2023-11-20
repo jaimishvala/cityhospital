@@ -161,26 +161,26 @@ const data = [
 function Product(props) {
     return (
         // <div className='container'>
-            <div className='row'>
-                {
+        <div className='row'>
+            {
 
-                    data.map((v) => {
+                data.map((v) => {
 
-                        return (
-                            <div className='col-lg-4 mb-2'>
-                                <Card
-                                    id={v.id}
-                                    title={v.name}
-                                    img={v.url}
-                                    SubTitle={v.price}
-                                />
-                            </div>
-                        )
+                    return (
+                        <div className='col-lg-4 mb-2'>
+                            <Card
+                                id={v.id}
+                                title={v.name}
+                                img={v.url}
+                                SubTitle={v.price}
+                            />
+                        </div>
+                    )
 
-                    })
+                })
 
-                }
-            </div>
+            }
+        </div>
         // </div>
     );
 }
