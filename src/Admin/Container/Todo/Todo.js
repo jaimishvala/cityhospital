@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import TodoForm from './TodoForm';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import Switch from '@mui/material/Switch';
+import { json } from 'react-router-dom';
 
 
 function Todo() {
@@ -98,6 +99,25 @@ function Todo() {
 
     console.log(data);
 
+    const handleSelect = (value) => {
+        let localData = JSON.parse(localStorage.getItem("todo"))
+
+        let fdata = localData.filter((v) => v.status === true)
+        console.log(fdata);
+
+        let mdata = localData.filter((v) => v.status === false)
+        console.log(mdata);
+
+        if (value === 'all') {
+            setData(localData)
+        } else if (value === 'complete') {
+            setData(fdata)
+        } else if (value === 'uncomplete') {
+            setData(mdata)
+        }
+
+    }
+
     const columns = [
         { field: 'title', headerName: 'Title', width: 130 },
         {
@@ -136,6 +156,13 @@ function Todo() {
     return (
         <>
             <TodoForm onHandleSubmit={handleFormSubmit} updateData={update} />
+
+            <select onChange={(event) => handleSelect(event.target.value)}>
+                <option value="0">--Select--</option>
+                <option value="complete">Complete</option>
+                <option value="uncomplete">Uncomplete</option>
+                <option value="all">All</option>
+            </select>
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid

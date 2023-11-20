@@ -35,22 +35,6 @@ function TodoForm({ onHandleSubmit, updateData }) {
         setOpen(false);
     };
 
-    const handleSelect = (value) => {
-        console.log(value);
-        let localData = JSON.parse(localStorage.getItem("todo"));
-        console.log(localData);
-
-        // let fData = localData.map((v) => {
-        //     if (v === v.id) {
-        //         return v.id
-        //     } else {
-        //         return v
-        //     }
-        // })
-
-
-    }
-
     let todoSchema = yup.object().shape({
         title: yup
             .string()
@@ -78,12 +62,7 @@ function TodoForm({ onHandleSubmit, updateData }) {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Todo
             </Button>
-            <select onChange={(event) => handleSelect(event.target.value)}>
-                <option value="0">--Select--</option>
-                <option value="complete">Complete</option>
-                <option value="uncomplete">Uncomplete</option>
-                <option value="all">All</option>
-            </select>
+
             {/* <Box sx={{ minWidth: 10 }}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Age</InputLabel>
@@ -120,7 +99,7 @@ function TodoForm({ onHandleSubmit, updateData }) {
 
                         <FormControlLabel
                             id="status"
-                            name='status'
+                            name='status'   
                             control={<Checkbox defaultChecked={values.status ? true : false} />}
                             label="Todo Status"
                             onChange={handleChange}
