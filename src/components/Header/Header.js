@@ -9,6 +9,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from 'react-redux';
 import { useContext } from 'react';
 import ThemeContext from '../../context/theme.context';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 function Header({ countCart, fav }) {
     const theme = useContext(ThemeContext)
@@ -24,10 +26,19 @@ function Header({ countCart, fav }) {
         },
     }));
 
-    const cart = useSelector(state => state.cart)
+    let cart = useSelector(state => state.cart)
+    console.log(cart);
+
 
     const cartCount = cart.cart.reduce((acc, v) => acc + v.qty, 0)
     console.log(cartCount);
+
+    // let qty = 0;
+    // {
+    //     cart.cart.map((v) => qty = qty + v.qty)
+    // }
+    // console.log(qty);    
+
 
     return (
         <div className="main-header">
@@ -39,14 +50,19 @@ function Header({ countCart, fav }) {
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
-                        <button onClick={() => theme.toggleTheme(theme.theme)}>Theme Change</button>
+                        {
+                            theme.theme === 'light' ?
+                                <DarkModeOutlinedIcon onClick={() => theme.toggleTheme(theme.theme)} style={{ cursor: 'pointer' }} /> :
+                                <LightModeOutlinedIcon onClick={() => theme.toggleTheme(theme.theme)} style={{ cursor: 'pointer' }} />
+                        }
+
                         {/* 
                         <FavoriteBorderIcon favorite={favorite} /> */}
 
                         <Link to={"/FavoriteCart"}>
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={fav.length} color="secondary">
-                                    <FavoriteIcon sx={theme == 'gray' ? 'gray' : 'white'} />
+                                    <FavoriteIcon sx={{ color: theme.theme === 'light' ? 'gray' : 'white' }} />
                                 </StyledBadge>
                             </IconButton>
                         </Link>
@@ -59,7 +75,7 @@ function Header({ countCart, fav }) {
                         <Link to="/AddToCart">
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={cartCount} color="secondary">
-                                    <ShoppingCartIcon sx={theme == 'gray' ? 'gray' : 'white'} />
+                                    <ShoppingCartIcon sx={{ color: theme.theme === 'light' ? 'gray' : 'white' }} />
                                 </StyledBadge>
                             </IconButton>
                         </Link>

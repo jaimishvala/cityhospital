@@ -71,17 +71,17 @@ function AddToCart(props) {
                                         +
                                     </button>
 
-                                    <span style={{ color: 'blue' }}>{v.qty}</span>
+                                    <span>{v.qty}</span>
 
                                     <button className="minus-btn" type="button" name="button" onClick={() => handleDecrement(v.id)}>
                                         -
                                     </button>
                                 </div>
-                                <div className="total-price" style={{ color: 'blue' }}>${v.price * v.qty}</div>
+                                <div className="total-price">{v.price * v.qty}</div>
 
 
                                 <div className='delete'>
-                                    <DeleteIcon onClick={() => handleDelete(v.id)} style={{ color: 'blue' }} />
+                                    <DeleteIcon onClick={() => handleDelete(v.id)} />
                                 </div>
 
                             </div>
@@ -93,7 +93,7 @@ function AddToCart(props) {
                 }
 
                 <>
-                    <h4 className='span' style={{ color: 'red' }}>Total:{total}</h4>
+                    <h4 className='span'>Total:{total}</h4>
                 </>
             </div>
 

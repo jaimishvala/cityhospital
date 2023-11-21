@@ -45,7 +45,7 @@ body {
   /* width: 750px; */
   /* height: 423px; */
   margin: 80px auto;
-  background: #FFFFFF;
+  /* background: #FFFFFF; */
   box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.10);
   border-radius: 6px;
 
@@ -1643,7 +1643,7 @@ section {
   min-height: 200px;
   box-shadow: 0px 2px 12px rgba(44, 73, 100, 0.08);
   position: relative;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .testimonials .testimonial-item .testimonial-img {
@@ -1746,7 +1746,7 @@ section {
 --------------------------------------------------------------*/
 .contact .info {
   width: 100%;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .contact .info i {
@@ -1792,7 +1792,7 @@ section {
 
 .contact .php-email-form {
   width: 100%;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .contact .php-email-form .form-group {
