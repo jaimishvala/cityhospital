@@ -382,7 +382,7 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-  background: #fff;
+  /* background: #fff; */
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -434,7 +434,7 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #fff;
+  /* background: #fff; */
   transition: all 0.5s;
   z-index: 997;
   padding: 15px 0;
@@ -1456,7 +1456,7 @@ section {
 # Doctors
 --------------------------------------------------------------*/
 .doctors {
-  background: #fff;
+  /* background: #fff; */
 }
 
 .doctors .member {
@@ -1895,7 +1895,7 @@ section {
 #footer {
   color: #444444;
   font-size: 14px;
-  background: #FFF4F3;
+  /* background: #FFF4F3; */
 }
 
 #footer .footer-top {

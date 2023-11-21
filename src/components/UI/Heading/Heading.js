@@ -107,7 +107,7 @@ font-family: "Raleway", sans-serif;
 font-size: 18px;
 font-weight: bold;
 margin: 10px 0 5px 0;
-color: #111;
+color: #e1d3d3;
 `
 
 export const H4 = styled.h4`

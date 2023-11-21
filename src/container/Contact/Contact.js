@@ -3,6 +3,7 @@ import { ContactH4, Section } from '../../components/UI/Heading/Heading';
 import { Main, P, P1 } from '../../components/UI/TextArea/TextArea';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import InputBox from '../../components/InputBox/InputBox';
 
 function Contact() {
 
@@ -81,7 +82,7 @@ function Contact() {
                         <form role="form" method='post' className="php-email-form" onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6 form-group">
-                                    <input
+                                    <InputBox
                                         type="text"
                                         name="name"
                                         className="form-control"
@@ -90,14 +91,15 @@ function Contact() {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.name}
+                                        TextError={errors.name && touched.name ? <span>{errors.name}</span> : ''}
                                     />
-                                    {errors.name && touched.name ? <span>{errors.name}</span> : null}
+                                    {/* {errors.name && touched.name ? <span>{errors.name}</span> : null} */}
                                 </div>
 
 
 
                                 <div className="col-md-6 form-group mt-3 mt-md-0">
-                                    <input
+                                    <InputBox
                                         type="email"
                                         className="form-control"
                                         name="email"
@@ -106,15 +108,16 @@ function Contact() {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
+                                        TextError={errors.email && touched.email ? <span>{errors.email}</span> : ''}
                                     />
-                                    {errors.email && touched.email ? <span>{errors.email}</span> : null}
+                                    {/* {errors.email && touched.email ? <span>{errors.email}</span> : null} */}
                                 </div>
 
 
 
                             </div>
                             <div className="form-group mt-3">
-                                <input
+                                <InputBox
                                     type="text"
                                     className="form-control"
                                     name="subject"
@@ -123,8 +126,9 @@ function Contact() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.subject}
+                                    TextError={errors.subject && touched.subject ? <span>{errors.subject}</span> : ''}
                                 />
-                                {errors.subject && touched.subject ? <span>{errors.subject}</span> : null}
+                                {/* {errors.subject && touched.subject ? <span>{errors.subject}</span> : null} */}
                             </div>
 
 
@@ -139,7 +143,7 @@ function Contact() {
                                     onBlur={handleBlur}
                                     value={values.message}
                                 />
-                                {errors.message && touched.message ? <span>{errors.message}</span> : null}
+                                {errors.message && touched.message ? <span style={{color:'red'}}>{errors.message}</span> : null}
                             </div>
 
 

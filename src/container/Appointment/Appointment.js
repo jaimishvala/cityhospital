@@ -5,6 +5,7 @@ import Button from '../../components/UI/Button/Button';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { type } from '@testing-library/user-event/dist/type';
+import InputBox from '../../components/InputBox/InputBox';
 
 function Appointment(props) {
 
@@ -111,7 +112,7 @@ function Appointment(props) {
                             <div className="col-md-4 form-group">
 
                                 {/* Name: */}
-                                <input type="text"
+                                <InputBox type="text"
                                     name="name"
                                     className="form-control"
                                     id="name"
@@ -119,13 +120,14 @@ function Appointment(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.name}
+                                    TextError={errors.name && touched.name ? <span>{errors.name}</span> : ''}
                                 />
-                                {errors.name && touched.name ? <span>{errors.name}</span> : null}
+                                {/* {errors.name && touched.name ? <span>{errors.name}</span> : null} */}
 
                             </div>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
                                 {/* Email */}
-                                <input
+                                <InputBox
                                     type="email"
                                     className="form-control"
                                     name="email"
@@ -134,14 +136,15 @@ function Appointment(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.email}
+                                    TextError={errors.email && touched.email ? <span>{errors.email}</span> : ''}
                                 />
-                                {errors.email && touched.email ? <span>{errors.email}</span> : null}
+                                {/* {errors.email && touched.email ? <span>{errors.email}</span> : null} */}
 
                             </div>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
 
                                 {/* Phone */}
-                                <input
+                                <InputBox
                                     type="tel"
                                     className="form-control"
                                     name="phone"
@@ -150,8 +153,9 @@ function Appointment(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.phone}
+                                    TextError={errors.phone && touched.phone ? <span>{errors.phone}</span> : ''}
                                 />
-                                {errors.phone && touched.phone ? <span>{errors.phone}</span> : null}
+                                {/* {errors.phone && touched.phone ? <span>{errors.phone}</span> : null} */}
 
                             </div>
                         </div>
@@ -159,7 +163,7 @@ function Appointment(props) {
                             <div className="col-md-4 form-group mt-3">
 
                                 {/* Date */}
-                                <input
+                                <InputBox
                                     type="date"
                                     name="date"
                                     className="form-control datepicker"
@@ -168,8 +172,9 @@ function Appointment(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.date}
+                                    TextError={errors.date && touched.date ? <span>{errors.date}</span> : ''}
                                 />
-                                {errors.date && touched.date ? <span>{errors.date}</span> : null}
+                                {/* {errors.date && touched.date ? <span>{errors.date}</span> : null} */}
                             </div>
                             <div className="col-md-4 form-group mt-3">
 
@@ -188,21 +193,22 @@ function Appointment(props) {
                                     <option value="Department 3">Department 3</option>
 
                                 </select>
-                                {errors.department && touched.department ? <span>{errors.department}</span> : null}
+                                {errors.department && touched.department ? <span style={{ color: 'red' }}>{errors.department}</span> : null}
                             </div>
 
                             {/* File */}
 
                             <div className="col-md-4 form-group mt-3">
 
-                                <input
+                                <InputBox
                                     type="file"
                                     name="file"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.file}
+                                    TextError={errors.file && touched.file ? <span>{errors.file}</span> : ''}
                                 />
-                                {errors.file && touched.file ? <span>{errors.file}</span> : null}
+                                {/* {errors.file && touched.file ? <span>{errors.file}</span> : null} */}
                             </div>
 
                         </div>
@@ -218,7 +224,7 @@ function Appointment(props) {
                                 onBlur={handleBlur}
                                 value={values.message}
                             />
-                            {errors.message && touched.message ? <span>{errors.message}</span> : null}
+                            {errors.message && touched.message ? <span style={{ color: 'red' }}>{errors.message}</span> : null}
 
                         </div>
                         <div className="mb-3">

@@ -46,7 +46,7 @@ function Header({ countCart, fav }) {
                         <Link to={"/FavoriteCart"}>
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={fav.length} color="secondary">
-                                    <FavoriteIcon />
+                                    <FavoriteIcon sx={theme == 'gray' ? 'gray' : 'white'} />
                                 </StyledBadge>
                             </IconButton>
                         </Link>
@@ -59,7 +59,7 @@ function Header({ countCart, fav }) {
                         <Link to="/AddToCart">
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={cartCount} color="secondary">
-                                    <ShoppingCartIcon />
+                                    <ShoppingCartIcon sx={theme == 'gray' ? 'gray' : 'white'} />
                                 </StyledBadge>
                             </IconButton>
                         </Link>
