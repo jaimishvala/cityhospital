@@ -7,8 +7,12 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+import ThemeContext from '../../context/theme.context';
 
 function Header({ countCart, fav }) {
+    const theme = useContext(ThemeContext)
+    console.log(theme);
     const c1 = useSelector(state => state.counter)
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -35,6 +39,7 @@ function Header({ countCart, fav }) {
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
+                        <button onClick={() => theme.toggleTheme(theme.theme)}>Theme Change</button>
                         {/* 
                         <FavoriteBorderIcon favorite={favorite} /> */}
 

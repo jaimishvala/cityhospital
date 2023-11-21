@@ -19,44 +19,50 @@ import FormSubmition from '../container/Appointment/FormSubmition';
 import Counter from '../container/Counter/Counter';
 import AddToCart from '../container/Cart/AddToCart';
 import FavoriteCart from '../container/Cart/FavoriteCart';
+import { useContext } from 'react';
+import ThemeContext from '../context/theme.context';
 
 
 function UserRoute(props) {
+    const theme = useContext(ThemeContext)
+    console.log(theme);
     const [countCart, setCountCart] = useState(0)
     const [fav, setFav] = useState([])
 
     return (
         <>
-            <Header countCart={countCart} fav={fav} />
+            <div className={`${theme.theme}`}>
+                <Header countCart={countCart} fav={fav} />
 
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path='/ReviewPage/:id' element={<ReviewPage />} />
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path='/ReviewPage/:id' element={<ReviewPage />} />
 
-                <Route exact path="/Departments" element={<Department />} />
-                <Route exact path='/Departments/:id' element={<Dept />} />
+                    <Route exact path="/Departments" element={<Department />} />
+                    <Route exact path='/Departments/:id' element={<Dept />} />
 
-                <Route exact path="/Doctors" element={<Doctor />} />
-                {/* Counter */}
-                <Route exact path="/Counter" element={<Counter />} />
+                    <Route exact path="/Doctors" element={<Doctor />} />
+                    {/* Counter */}
+                    <Route exact path="/Counter" element={<Counter />} />
 
-                <Route exact path='/Medicine' element={<Medicines increment={setCountCart} fav={fav} setFav={setFav} />} />
+                    <Route exact path='/Medicine' element={<Medicines increment={setCountCart} fav={fav} setFav={setFav} />} />
 
-                <Route exact path='/MedicinesUser/:id' element={<MedicinesUser />} />
+                    <Route exact path='/MedicinesUser/:id' element={<MedicinesUser />} />
 
-                <Route exact path='/FavoriteCart' element={<FavoriteCart />} />
+                    <Route exact path='/FavoriteCart' element={<FavoriteCart />} />
 
-                <Route exact path='/AddToCart' element={<AddToCart />} />
+                    <Route exact path='/AddToCart' element={<AddToCart />} />
 
-                <Route exact path="/About" element={<Product />} />
-                <Route exact path="/Contact" element={<Contact />} />
-                <Route exact path="/Auth" element={<Auth />} />
-                <Route element={<PrivateRoute />}>
-                    <Route exact path="/Appointment" element={<Appointment />} />
-                </Route>
-                {/* <Route exact path="*" element={<Error />} /> */}
-            </Routes>
-            <Footers />
+                    <Route exact path="/About" element={<Product />} />
+                    <Route exact path="/Contact" element={<Contact />} />
+                    <Route exact path="/Auth" element={<Auth />} />
+                    <Route element={<PrivateRoute />}>
+                        <Route exact path="/Appointment" element={<Appointment />} />
+                    </Route>
+                    {/* <Route exact path="*" element={<Error />} /> */}
+                </Routes>
+                <Footers />
+            </div>
         </>
     );
 }
