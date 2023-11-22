@@ -14,7 +14,7 @@ function Card({ id, title = '', img = '', SubTitle = '', btnValue = '', btnClick
 
                 <IconButton aria-label="cart" onClick={favclick}>
                     <Badge badgeContent={favclick}>
-                        {favStatus ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                        {favStatus ? <FavoriteIcon style={{ color: "gray" }} /> : <FavoriteBorderIcon style={{ color: "gray" }} />}
                     </Badge>
                 </IconButton>
 
