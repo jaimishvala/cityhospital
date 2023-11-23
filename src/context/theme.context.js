@@ -4,7 +4,7 @@ import { TOGGLE_THEME } from "./ActionTypes";
 
 
 const initaVal = {
-    theme: 'light',
+    theme: 'light'
 }
 
 export const ThemeContext = createContext()
@@ -19,14 +19,13 @@ export const ThemeProvider = ({ children }) => {
         console.log(newTheme);
 
         dispatch({ type: TOGGLE_THEME, payload: newTheme });
-
     }
 
     return (
         <ThemeContext.Provider
             value={{
                 ...state,
-                toggleTheme
+                toggleTheme,
             }}
         >
             {children}

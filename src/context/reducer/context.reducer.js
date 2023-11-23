@@ -8,8 +8,8 @@ export const ThemeReducer = (state, action) => {
         case TOGGLE_THEME:
             return {
                 theme: action.payload
-            }
+            };
         default:
             return state;
-    }
-}
+    };
+};
