@@ -6,27 +6,29 @@ import { configureStore } from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from "./context/theme.context";
+import { LanguageProvider } from "./context/language.context";
 
 function App() {
   let { store, persistor } = configureStore()
 
   return (
-    <>  
-      <ThemeProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Routes>
-              <Route path="/*" element={<UserRoute />} />
+    <>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Routes>
+                <Route path="/*" element={<UserRoute />} />
 
-              <Route element={<PrivateRoute />}>
-                <Route path="/Admin/*" element={<AdminRoute />} />
-              </Route>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/Admin/*" element={<AdminRoute />} />
+                </Route>
 
-            </Routes>
-          </PersistGate>
-        </Provider>
-      </ThemeProvider>
-
+              </Routes>
+            </PersistGate>
+          </Provider>
+        </ThemeProvider>
+      </LanguageProvider>
     </>
   );
 }
