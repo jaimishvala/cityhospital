@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addMedicineData, deleteMedicineData, getMedicineData, updateMedicineData } from "../../common/api/medicine.api"
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 
 const initialState = {
@@ -46,9 +48,16 @@ export const deleteMedicine = createAsyncThunk(
 export const addMedicines = createAsyncThunk(
     'medicines/post',
     async (data) => {
-        await addMedicineData(data);
+        // await addMedicineData(data);
+        // return data;
 
-        return data;
+        try {
+            const docRef = await addDoc(collection(db, "medicines"), { data });
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+
     }
 )
 
