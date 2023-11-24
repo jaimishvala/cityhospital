@@ -16,16 +16,7 @@ export const LanguageProvider = ({ children }) => {
     const handleLanguageChange = (value) => {
         console.log("language", value);
 
-        let newLanguage;
-        if (value === 'gujarati') {
-            newLanguage = 'gujarati';
-        } else if (value === 'hindi') {
-            newLanguage = 'hindi';
-        } else if (value === 'english') {
-            newLanguage = 'english';
-        }
-
-        dispatch({ type: TOGGLE_LANGUAGE, payload: newLanguage })
+        dispatch({ type: TOGGLE_LANGUAGE, payload: value })
     }
 
     return (

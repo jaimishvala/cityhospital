@@ -18,8 +18,7 @@ function Header({ countCart, fav }) {
     console.log(theme);
     const language = useContext(LanguageContext)
     console.log(language);
-    // const language = useContext(ThemeContext)
-    // console.log(language);
+
     const c1 = useSelector(state => state.counter)
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -56,8 +55,8 @@ function Header({ countCart, fav }) {
 
                     <div className="d-none d-lg-flex social-links align-items-center">
 
-                        <select onChange={() => language.handleLanguageChange(language.language)}>
-                            <option>--Select-Language--</option>
+                        <select onChange={(event) => language.handleLanguageChange(event.target.value)}>
+                            <option value="">--Select-Language--</option>
                             <option value="english">English</option>
                             <option value="gujarati">Gujarati</option>
                             <option value="hindi">Hindi</option>
