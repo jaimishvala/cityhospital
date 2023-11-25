@@ -5,7 +5,6 @@ import Layout from '../Admin/Container/Components/Layout';
 import Doctor from '../Admin/Container/Doctor/Doctor';
 import Department from '../Admin/Department/Department';
 import Todo from '../Admin/Container/Todo/Todo';
-import Appoint from '../Admin/Container/Appointments/Appoint';
 
 
 function AdminRoute(props) {
@@ -17,7 +16,6 @@ function AdminRoute(props) {
                     <Route exact path='/Doctor' element={<Doctor />} />
                     <Route exact path='/Department' element={<Department />} />
                     <Route exact path='/Todo' element={<Todo />} />
-                    <Route exact path='/Appoint' element={<Appoint />}/>
                 </Routes>
             </Layout>
         </>
