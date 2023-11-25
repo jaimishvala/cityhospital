@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addMedicineData, deleteMedicineData, getMedicineData, updateMedicineData } from "../../common/api/medicine.api"
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 
@@ -27,11 +27,19 @@ export const getMedicine = createAsyncThunk(
     'medicines/get',
     async () => {
         await new Promise((resolve, reject) => setTimeout(resolve, 2000))
-        let response = await getMedicineData();
 
-        console.log(response.data);
+        let data = [];
 
-        return response.data;
+        const querySnapshot = await getDocs(collection(db, "medicines"));
+        querySnapshot.forEach((doc) => {
+            data.push({ ...doc.data(), id: doc.id })
+            console.log(`${doc.id} => ${doc.data()}`);
+        });
+        console.log(data);
+        // let response = await getMedicineData();
+        // console.log(response.data);
+        // return response.data;
+        return data;
     }
 
 )
@@ -39,7 +47,8 @@ export const getMedicine = createAsyncThunk(
 export const deleteMedicine = createAsyncThunk(
     'medicines/delete',
     async (id) => {
-        await deleteMedicineData(id);
+        // await deleteMedicineData(id);
+        await deleteDoc(doc(db, "medicines", id));
 
         return id;
     }
@@ -50,10 +59,11 @@ export const addMedicines = createAsyncThunk(
     async (data) => {
         // await addMedicineData(data);
         // return data;
-
+        console.log(data);
         try {
-            const docRef = await addDoc(collection(db, "medicines"), { data });
+            const docRef = await addDoc(collection(db, "medicines"), data);
             console.log("Document written with ID: ", docRef.id);
+            return { ...data, id: docRef.id }
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -64,7 +74,12 @@ export const addMedicines = createAsyncThunk(
 export const updateMedicine = createAsyncThunk(
     'medicines/put',
     async (data) => {
-        await updateMedicineData(data);
+        console.log(data);
+        // await updateMedicineData(data);
+        const washingtonRef = doc(db, "medicines", data.id);
+
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(washingtonRef, { ...data, id: data.id });
 
         return data;
     }
