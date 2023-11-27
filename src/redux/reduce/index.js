@@ -14,5 +14,5 @@ export const rootReducer = combineReducers({
    cart: cartReducer,
    favorite: favoriteReducer,
    doctor: doctorReducer,
-   appointment:appointmentReducer
+   appointment: appointmentReducer
 })
