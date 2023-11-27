@@ -9,7 +9,7 @@ import Contact from "../container/Contact/Contact"
 import Auth from "../container/Auth/Auth";
 import Appointment from "../container/Appointment/Appointment";
 import Product from "../components/Product/Product";
-// import Error from "../components/Error/Error";
+import Error from "../components/Error/Error";
 import PrivateRoute from './PrivateRoute';
 import Dept from '../container/Department/Dept';
 import ReviewPage from '../container/Home/ReviewPage';
@@ -22,6 +22,7 @@ import FavoriteCart from '../container/Cart/FavoriteCart';
 import { useContext } from 'react';
 import ThemeContext from '../context/theme.context';
 import { LanguageContext } from '../context/language.context';
+import MakeAppointment from '../container/Appointment/MakeAppointment';
 
 
 function UserRoute(props) {
@@ -62,9 +63,10 @@ function UserRoute(props) {
                         <Route exact path="/Contact" element={<Contact />} />
                         <Route exact path="/Auth" element={<Auth />} />
                         <Route element={<PrivateRoute />}>
-                            <Route exact path="/Appointment" element={<Appointment />} />
+                            {/* <Route exact path="/Appointment" element={<Appointment />} /> */}
+                            <Route exact path='/Appointment' element={<MakeAppointment />} />
                         </Route>
-                        {/* <Route exact path="*" element={<Error />} /> */}
+                        <Route exact path="*" element={<Error />} />
                     </Routes>
                     <Footers />
                 </div>

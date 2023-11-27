@@ -5,6 +5,7 @@ import { doctorReducer } from "./doctor.reducer";
 import counterReducer from "../slice/counter.slice";
 import cartReducer from "../slice/cart.slice";
 import medicinesReducer from "../slice/medicines.slice";
+import appointmentReducer from "../slice/appointment.slice";
 
 export const rootReducer = combineReducers({
    counter: counterReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
    cart: cartReducer,
    favorite: favoriteReducer,
    doctor: doctorReducer,
+   appointment:appointmentReducer
 })

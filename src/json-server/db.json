@@ -105,5 +105,27 @@
       "profile_url": "www.jai",
       "id": 5
     }
+  ],
+  "appointment": [
+    {
+      "id": 1,
+      "name": "jaimish",
+      "email": "jaimishvala@gmail.com",
+      "phone": 7265939795,
+      "date": "2023-11-30",
+      "department": "Department 2",
+      "file": "Screenshot 2023-06-13 093615.png",
+      "message": "diubfdsggfdgfdg"
+    },
+    {
+      "name": "zero",
+      "email": "zero@gmail.com",
+      "phone": "7265915599",
+      "date": "2023-11-30",
+      "department": "Department 1",
+      "message": "gfgfgdgdgdg",
+      "file": "C:\\fakepath\\Screenshot 2023-06-13 093632.png",
+      "id": 5
+    }
   ]
 }

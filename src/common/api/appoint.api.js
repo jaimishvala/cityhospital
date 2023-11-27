@@ -5,14 +5,14 @@ export const getAppointmentData = () => {
     return getRequest('appointment/')
 }
 
-export const addAppointData = (data) => {
+export const addAppointmentData = (data) => {
     return addRequest('appointment/', data)
 }
 
-export const deleteAppointData = (id) => {
+export const deleteAppointmentData = (id) => {
     return deleteRequest('appointment/', id)
 }
 
-export const updateAppointData = (data) => {
+export const updateAppointmentData = (data) => {
     return updateRequest('appointment/', data)
 }

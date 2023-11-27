@@ -6,8 +6,9 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { type } from '@testing-library/user-event/dist/type';
 import InputBox from '../../components/InputBox/InputBox';
+import { useEffect } from 'react';
 
-function Appointment(props) {
+function Appointment({ onHandleSubmit }) {
 
     let d = new Date()
     let nd = new Date()
@@ -32,32 +33,32 @@ function Appointment(props) {
         department: yup.string()
             .required("Please Select Any One Option"),
         message: yup.string()
-            .required("Please Enter Message")
-            .matches(/(\s\s\s*)/, "Please Extra Space Remove")
-            // .min(30, "Minimum 30 Character Valid")
-            // .max(100, "Maximum 100 Charecter Allowed")
-            .test("message", "More Than 5 Word Alowed", function (value) {
-                // let arr = value.split(" ")
+            .required("Please Enter Message"),
+        // .matches(/(\s\s\s*)/, "Please Extra Space Remove")
+        // .min(30, "Minimum 30 Character Valid")
+        // .max(100, "Maximum 100 Charecter Allowed")
+        // .test("message", "More Than 5 Word Alowed", function (value) {
+        //     // let arr = value.split(" ")
 
-                if (value.length <= 5) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }),
+        //     if (value.length <= 5) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }),
 
         file: yup.mixed()
             .required("Please Enter File")
-            .test("file", "More Than 2Mb And Jpg File Allowed", function (v) {
-                console.log(v);
+        // .test("file", "More Than 2Mb And Jpg File Allowed", function (v) {
+        //     console.log(v);
 
-                if (v <= 2000 && v === "jpg") {
-                    return true;
-                } else {
-                    return false;
-                }
+        //     if (v <= 2000 && v === "jpg") {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
 
-            })
+        // })
     })
 
 
@@ -72,18 +73,20 @@ function Appointment(props) {
             file: ''
 
         },
-        onSubmit: values => {
-            console.log(values);
+        onSubmit: (values, action) => {
+            // console.log(values);
+            onHandleSubmit(values)
 
-            let array = values.message.split(" ")
-            // console.log(array);
+            // let array = values.message.split(" ")
+            // // console.log(array);
 
-            let newArray = array.map((v) =>
-                v[0].toUpperCase() + v.substring(1)
-            )
-            // console.log(newArray);
+            // let newArray = array.map((v) =>
+            //     v[0].toUpperCase() + v.substring(1)
+            // )
+            // // console.log(newArray);
 
-            console.log(newArray.join(" "));
+            // console.log(newArray.join(" "));
+            action.resetForm()
 
         },
 
@@ -92,7 +95,7 @@ function Appointment(props) {
 
     // console.log(Appointschema);
 
-    const { handleSubmit, handleChange, handleBlur, values, errors, touched } = formikObj
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } = formikObj
     // console.log(errors);
 
 
