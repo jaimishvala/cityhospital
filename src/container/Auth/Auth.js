@@ -5,6 +5,8 @@ import { Section } from '../../components/UI/Heading/Heading';
 import { Main } from '../../components/UI/TextArea/TextArea';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { signupRequest } from '../../redux/action/auth.action';
 
 function Auth(props) {
     const [type, setType] = useState("login")
@@ -52,15 +54,26 @@ function Auth(props) {
         }
     }
 
-
     let AuthSchema = yup.object().shape(authObj);
+
+    const dispatch = useDispatch()
+
+    const handleSingUp = (data) => {
+        dispatch(signupRequest(data))
+    }
 
     const formikObj = useFormik({
 
         initialValues: iniVal,
 
         onSubmit: values => {
-            console.log(values)
+            // console.log(values)
+
+            if (type === 'login') {
+
+            } else if (type === 'signup') {
+                handleSingUp(values);
+            }
         },
 
         enableReinitialize: true,
