@@ -36,4 +36,7 @@ export const ADD_FAVOTIRE_CART = "ADD_FAVOTIRE_CART"
 export const DELETE_FAVORITE_CART = "DELETE_FAVORITE_CART"
 
 /********************Authentication-Redux-Saga**************************** */
+//SignUp:
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST"
+export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE"
+export const AUTH_ERROR = "AUTH_ERROR"
