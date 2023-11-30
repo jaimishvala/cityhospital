@@ -1,14 +1,18 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
-import { AUTH_ERROR, SIGNUP_REQUEST, SIGNUP_RESPONSE } from '../ActionType'
-import { singupAPI } from '../../common/api/auth.api'
+import { SIGNIN_REQUEST, SIGNUP_REQUEST } from '../ActionType'
+import { signinAPI, signupAPI } from '../../common/api/auth.api'
+import { authError, signinResponse, signupResponse } from '../action/auth.action'
 
 
 function* signupUser(action) {
+    console.log("jjjj");
     try {
-        const user = yield call(singupAPI, action.payload)
-        yield put({ type: SIGNUP_RESPONSE, user: user })
+        const user = yield call(signupAPI, action.payload)
+        console.log(user);
+        yield put(signupResponse(user.user))
     } catch (e) {
-        yield put({ type: AUTH_ERROR, message: e.message })
+        yield put(authError(e.message))
+        console.log(e);
     }
 }
 
@@ -16,10 +20,25 @@ function* watchsignup() {
     yield takeEvery(SIGNUP_REQUEST, signupUser)
 }
 
-export function* authSaga() {
-    yield all([
-        watchsignup()
-    ])
+function* signinUser(action) {
+    console.log("signin");
+    try {
+        const user = yield call(signinAPI, action.payload)
+        console.log(user);
+        yield put(signinResponse(user.user))
+    } catch (e) {
+        yield put(authError(e.message))
+        console.log(e);
+    }
 }
 
-export default authSaga
+function* watchsignin() {
+    yield takeEvery(SIGNIN_REQUEST, signinUser)
+}
+
+export function* authSaga() {
+    yield all([
+        watchsignup(),
+        watchsignin()
+    ])
+}
