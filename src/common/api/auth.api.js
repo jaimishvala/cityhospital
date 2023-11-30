@@ -1,8 +1,8 @@
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../firebase";
 
 
-export const singupAPI = (data) => {
+export const signupAPI = (data) => {
     console.log(data);
 
     try {
@@ -12,26 +12,35 @@ export const singupAPI = (data) => {
                     // Signed up 
                     const user = userCredential.user;
                     console.log(user)
-                    sendEmailVerification(auth.user)
+
+                    const auth = getAuth()
+                    sendEmailVerification(auth.currentUser)
                         .then(() => {
-                            resolve("Email Verification Done.")
-                        });
+                            console.log("Email verification sent!");
+                            resolve({ message: "Email verification sent!", user: user });
+                        })
+                        .catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                        })
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    console.log(error.message);
 
-                    console.log(errorCode, errorMessage);
-
-                    if (errorCode.localeCompare(errorMessage) === "auth/email-already-in-use") {
-                        resolve("Email Already Used.")
+                    if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
+                        reject({ message: "Email Already Used." })
+                    } else if (errorCode.localeCompare("auth/weak-password") === 0) {
+                        reject({ message: "The password must be 6 characters long or more." })
                     }
+
+                    reject({ message: error.message });
                 })
         })
 
     } catch (error) {
         const errorMessage = error.message;
-        console.log(errorMessage);
 
         return errorMessage;
     }
