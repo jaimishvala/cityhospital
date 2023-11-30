@@ -59,7 +59,7 @@ export const signinAPI = (data) => {
                     const user = userCredential.user;
                     console.log(user);
                     // ...
-                    signOut(auth.currentUser)
+                    signOut(auth)
                         .then(() => {
                             console.log("Loging Successfully Done!");
                             resolve({ message: "Loging Successfully Done!", user: user });
