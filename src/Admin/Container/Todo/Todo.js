@@ -155,14 +155,7 @@ function Todo() {
 
     return (
         <>
-            <TodoForm onHandleSubmit={handleFormSubmit} updateData={update} />
-
-            <select onChange={(event) => handleSelect(event.target.value)}>
-                <option value="0">--Select--</option>
-                <option value="complete">Complete</option>
-                <option value="uncomplete">Uncomplete</option>
-                <option value="all">All</option>
-            </select>
+            <TodoForm onHandleSubmit={handleFormSubmit} updateData={update}  handleSelect={handleSelect}/>
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid

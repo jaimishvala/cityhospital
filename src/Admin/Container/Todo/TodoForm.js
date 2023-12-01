@@ -15,7 +15,7 @@ import { FormControlLabel, Select } from '@mui/material';
 // import FormControl from '@mui/material/FormControl';
 // import Select from '@mui/material/Select';
 
-function TodoForm({ onHandleSubmit, updateData }) {
+function TodoForm({ onHandleSubmit, updateData, handleSelect }) {
     const [open, setOpen] = React.useState(false);
     // const [age, setAge] = React.useState('');
 
@@ -62,6 +62,12 @@ function TodoForm({ onHandleSubmit, updateData }) {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Todo
             </Button>
+            <select onChange={(event) => handleSelect(event.target.value)}>
+                <option value="0">--Select--</option>
+                <option value="complete">Complete</option>
+                <option value="uncomplete">Uncomplete</option>
+                <option value="all">All</option>
+            </select>
 
             {/* <Box sx={{ minWidth: 10 }}>
                 <FormControl fullWidth>
@@ -99,7 +105,7 @@ function TodoForm({ onHandleSubmit, updateData }) {
 
                         <FormControlLabel
                             id="status"
-                            name='status'   
+                            name='status'
                             control={<Checkbox defaultChecked={values.status ? true : false} />}
                             label="Todo Status"
                             onChange={handleChange}
