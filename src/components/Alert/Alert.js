@@ -15,17 +15,21 @@ function Alert(props) {
 
     useEffect(() => {
         if (alert.text !== '') {
-            enqueueSnackbar(alert.text, { variant: "success" })
+            enqueueSnackbar(alert.text, {
+                variant: alert.color,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "right"
+                }
+            })
         }
 
-        setTimeout(() => {
-            dispatch(resetAlert(alert.text))
+        let resetRef = setTimeout(() => {
+            dispatch(resetAlert());
         }, 2000)
 
         return () => {
-            clearTimeout(() => {
-                dispatch(resetAlert(alert.text))
-            })
+            clearTimeout(resetRef);
         }
 
     }, [alert.text])

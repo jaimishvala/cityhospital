@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail } from "firebase/auth";
 import { auth } from "../../firebase";
 
 
@@ -59,6 +59,7 @@ export const signinAPI = (data) => {
                     const user = userCredential.user;
                     console.log(user);
                     // ...
+                    // resolve({ message: "Loging Successfully Done!", user: user });
                     signOut(auth)
                         .then(() => {
                             console.log("Loging Successfully Done!");
@@ -74,6 +75,54 @@ export const signinAPI = (data) => {
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    console.log(error.message);
+
+                    if (errorCode.localeCompare("auth/invalid-login-credentials") === 0) {
+                        reject({ message: "Invalid Email Or Password" })
+                    }
+
+                    reject({ message: error.message })
+                });
+        })
+
+    } catch (error) {
+        const errorMessage = error.message;
+
+        return errorMessage;
+    }
+}
+
+
+export const forgetAPI = (data) => {
+    console.log(data);
+
+    try {
+        return new Promise(function (resolve, reject) {
+            updateEmail(auth, data.email)
+                .then((userCredential) => {
+                    const user = userCredential.user
+                    console.log(user);
+                    sendPasswordResetEmail(auth.userCredential)
+                        .then(() => {
+                            console.log("Email Updated Succussfully!");
+                            resolve({ message: "Email Updated Succussfully!" })
+                        }).catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                        })
+
+                    // Email updated!
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(error.message);
+
+                    // if (errorCode.localeCompare("user.getIdToken is not a function") === 0) {
+                    //     reject({ message: "Email Already Used." })
+                    // }
+
+                    console.log("Email Already Used.");
+                    reject({ message: error.message })
                 });
         })
 

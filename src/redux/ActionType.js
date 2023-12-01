@@ -44,3 +44,7 @@ export const AUTH_ERROR = "AUTH_ERROR"
 //SignIn:
 export const SIGNIN_REQUEST = "SIGNIN_REQUEST"
 export const SIGNIN_RESPONSE = "SIGNIN_RESPONSE"
+
+//Forget:
+export const FORGET_REQUEST = "FORGET_REQUEST"
+export const FORGET_RESPONSE = "FORGET_RESPONSE"

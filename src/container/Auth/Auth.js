@@ -6,7 +6,7 @@ import { Main } from '../../components/UI/TextArea/TextArea';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { signinRequest, signupRequest } from '../../redux/action/auth.action';
+import { forgetRequest, signinRequest, signupRequest } from '../../redux/action/auth.action';
 
 function Auth(props) {
     const [type, setType] = useState("login")
@@ -66,6 +66,10 @@ function Auth(props) {
         dispatch(signinRequest(data))
     }
 
+    const handleForget = (data) => {
+        dispatch(forgetRequest(data))
+    }
+
     const formikObj = useFormik({
 
         initialValues: iniVal,
@@ -77,6 +81,8 @@ function Auth(props) {
                 handleSignIn(values)
             } else if (type === 'signup') {
                 handleSingUp(values);
+            } else {
+                handleForget(values)
             }
         },
 
