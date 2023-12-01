@@ -15,7 +15,7 @@ import { FormControlLabel, Select } from '@mui/material';
 // import FormControl from '@mui/material/FormControl';
 // import Select from '@mui/material/Select';
 
-function TodoForm({ onHandleSubmit, updateData }) {
+function TodoForm({ onHandleSubmit, updateData,handleSelect }) {
     const [open, setOpen] = React.useState(false);
     // const [age, setAge] = React.useState('');
 
@@ -35,22 +35,7 @@ function TodoForm({ onHandleSubmit, updateData }) {
         setOpen(false);
     };
 
-    const handleSelect = (value) => {
-        console.log(value);
-        let localData = JSON.parse(localStorage.getItem("todo"));
-        console.log(localData);
-
-        // let fData = localData.map((v) => {
-        //     if (v === v.id) {
-        //         return v.id
-        //     } else {
-        //         return v
-        //     }
-        // })
-
-
-    }
-
+    
     let todoSchema = yup.object().shape({
         title: yup
             .string()

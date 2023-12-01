@@ -96,6 +96,24 @@ function Todo() {
         setData(tData);
     }
 
+    const handleSelect = (value) => {
+        let localData = JSON.parse(localStorage.getItem("todo"));
+
+        let fdata = localData.filter((v) => v.status === true)
+        console.log(fdata);
+
+        let mdata = localData.filter((v) => v.status === false)
+        console.log(mdata);
+
+        if (value === 'all') {
+            setData(localData)
+        } else if (value === 'complete') {
+            setData(fdata)
+        } else if (value === 'uncomplete') {
+            setData(mdata)
+        }
+    }
+
     console.log(data);
 
     const columns = [
@@ -135,7 +153,7 @@ function Todo() {
 
     return (
         <>
-            <TodoForm onHandleSubmit={handleFormSubmit} updateData={update} />
+            <TodoForm onHandleSubmit={handleFormSubmit} updateData={update} handleSelect={handleSelect} />
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
