@@ -2,6 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects'
 import { SIGNIN_REQUEST, SIGNUP_REQUEST } from '../ActionType'
 import { signinAPI, signupAPI } from '../../common/api/auth.api'
 import { authError, signinResponse, signupResponse } from '../action/auth.action'
+import { setAlert } from '../slice/alert.slice';
 
 
 function* signupUser(action) {
@@ -10,6 +11,7 @@ function* signupUser(action) {
         const user = yield call(signupAPI, action.payload)
         console.log(user);
         yield put(signupResponse(user.user))
+        yield put (setAlert({text: user.message, color: 'success'}))
     } catch (e) {
         yield put(authError(e.message))
         console.log(e);

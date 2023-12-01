@@ -7,27 +7,38 @@ import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from "./context/theme.context";
 import { LanguageProvider } from "./context/language.context";
+import { SnackbarProvider } from "notistack";
+import Alert from "./components/Alert/Alert";
 
 function App() {
 
   return (
     <>
-      <LanguageProvider>
-        <ThemeProvider>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <Routes>
-                <Route path="/*" element={<UserRoute />} />
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <LanguageProvider>
+          <ThemeProvider>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <Alert />
 
-                <Route element={<PrivateRoute />}>
-                  <Route path="/Admin/*" element={<AdminRoute />} />
-                </Route>
+                <Routes>
+                  <Route path="/*" element={<UserRoute />} />
 
-              </Routes>
-            </PersistGate>
-          </Provider>
-        </ThemeProvider>
-      </LanguageProvider>
+                  <Route element={<PrivateRoute />}>
+                    <Route path="/Admin/*" element={<AdminRoute />} />
+                  </Route>
+
+                </Routes>
+              </PersistGate>
+            </Provider>
+          </ThemeProvider>
+        </LanguageProvider>
+      </SnackbarProvider>
     </>
   );
 }
