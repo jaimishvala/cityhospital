@@ -1,4 +1,4 @@
-import { AUTH_ERROR, FORGET_REQUEST, FORGET_RESPONSE, SIGNIN_REQUEST, SIGNIN_RESPONSE, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType"
+import { AUTH_ERROR, FORGET_REQUEST, FORGET_RESPONSE, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType"
 
 
 export const signupRequest = (data) => (dispatch) => {
@@ -14,14 +14,14 @@ export const authError = (data) => (dispatch) => {
     dispatch({ type: AUTH_ERROR, payload: data })
 }
 
-export const signinRequest = (data) => (dispatch) => {
+export const loginRequest = (data) => (dispatch) => {
     console.log(data);
-    dispatch({ type: SIGNIN_REQUEST, payload: data })
+    dispatch({ type: LOGIN_REQUEST, payload: data })
 }
 
-export const signinResponse = (data) => (dispatch) => {
+export const loginResponse = (data) => (dispatch) => {
     console.log(data);
-    dispatch({ type: SIGNIN_RESPONSE, payload: data })
+    dispatch({ type: LOGIN_RESPONSE, payload: data })
 }
 
 
@@ -30,7 +30,15 @@ export const forgetRequest = (data) => (dispatch) => {
     dispatch({ type: FORGET_REQUEST, payload: data })
 }
 
-export const forgetResponse = (data) => (dispatch) => {
-    console.log(data);
-    dispatch({ type: FORGET_RESPONSE, payload: data })
+// export const forgetResponse = (data) => (dispatch) => {
+//     console.log(data);
+//     dispatch({ type: FORGET_RESPONSE, payload: data })
+// }
+
+export const logOutRequest = () => (dispatch) => {
+    dispatch({ type: LOGOUT_REQUEST })
+}
+
+export const logOut = () => (dispatch) => {
+    dispatch({ type: LOGOUT })
 }

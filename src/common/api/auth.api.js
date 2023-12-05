@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 
 
@@ -48,7 +48,7 @@ export const signupAPI = (data) => {
 
 
 
-export const signinAPI = (data) => {
+export const loginAPI = (data) => {
     console.log(data);
 
     try {
@@ -59,18 +59,11 @@ export const signinAPI = (data) => {
                     const user = userCredential.user;
                     console.log(user);
                     // ...
-                    // resolve({ message: "Loging Successfully Done!", user: user });
-                    signOut(auth)
-                        .then(() => {
-                            console.log("Loging Successfully Done!");
-                            resolve({ message: "Loging Successfully Done!", user: user });
-                            // Sign-out successful.
-                        }).catch((error) => {
-                            const errorCode = error.code;
-                            const errorMessage = error.message;
-                            // An error happened.
-                        });
-
+                    if (user.emailVerified) {
+                        resolve({ message: "Loging Successfully Done!", user: user });
+                    } else {
+                        reject({ message: "Email Is Not Verified." })
+                    }
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -98,31 +91,15 @@ export const forgetAPI = (data) => {
 
     try {
         return new Promise(function (resolve, reject) {
-            updateEmail(auth, data.email)
-                .then((userCredential) => {
-                    const user = userCredential.user
-                    console.log(user);
-                    sendPasswordResetEmail(auth.userCredential)
-                        .then(() => {
-                            console.log("Email Updated Succussfully!");
-                            resolve({ message: "Email Updated Succussfully!" })
-                        }).catch((error) => {
-                            const errorCode = error.code;
-                            const errorMessage = error.message;
-                        })
-
-                    // Email updated!
-                }).catch((error) => {
+            sendPasswordResetEmail(auth, data.email)
+                .then(() => {
+                    resolve({ message: "Reset Password In Email Sent" })
+                    // Password reset email sent!
+                })
+                .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    console.log(error.message);
-
-                    // if (errorCode.localeCompare("user.getIdToken is not a function") === 0) {
-                    //     reject({ message: "Email Already Used." })
-                    // }
-
-                    console.log("Email Already Used.");
-                    reject({ message: error.message })
+                    reject({ message: errorMessage })
                 });
         })
 
@@ -132,3 +109,30 @@ export const forgetAPI = (data) => {
         return errorMessage;
     }
 }
+
+
+export const logOutAPI = () => {
+
+    try {
+        return new Promise(function (resolve, reject) {
+            signOut(auth)
+                .then(() => {
+                    resolve({ message: "LogOut Succussfully!" })
+                    // Sign-out successful.
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    reject({ message: "LogOut Is Not Succussfully!" })
+                    console.log(errorMessage);
+                    // An error happened.
+                });
+        })
+
+    } catch (error) {
+        const errorMessage = error.message;
+
+        return errorMessage;
+    }
+}
+

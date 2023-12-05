@@ -41,10 +41,14 @@ export const SIGNUP_REQUEST = "SIGNUP_REQUEST"
 export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE"
 export const AUTH_ERROR = "AUTH_ERROR"
 
-//SignIn:
-export const SIGNIN_REQUEST = "SIGNIN_REQUEST"
-export const SIGNIN_RESPONSE = "SIGNIN_RESPONSE"
+//LogIn:
+export const LOGIN_REQUEST = "LOGIN_REQUEST"
+export const LOGIN_RESPONSE = "LOGIN_RESPONSE"
 
 //Forget:
 export const FORGET_REQUEST = "FORGET_REQUEST"
 export const FORGET_RESPONSE = "FORGET_RESPONSE"
+
+//LogOut:
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST"
+export const LOGOUT = "LOGOUT"

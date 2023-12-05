@@ -6,18 +6,21 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useContext } from 'react';
 import ThemeContext from '../../context/theme.context';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { LanguageContext } from '../../context/language.context';
+import { logOutRequest } from '../../redux/action/auth.action';
 
 function Header({ countCart, fav }) {
     const theme = useContext(ThemeContext)
     console.log(theme);
     const language = useContext(LanguageContext)
     console.log(language);
+
+    const dispatch = useDispatch()
 
     const c1 = useSelector(state => state.counter)
 
@@ -29,6 +32,9 @@ function Header({ countCart, fav }) {
             padding: '0 4px',
         },
     }));
+
+    let auth = useSelector(state => state.auth)
+    console.log(auth);
 
     let cart = useSelector(state => state.cart)
     console.log(cart);
@@ -43,6 +49,10 @@ function Header({ countCart, fav }) {
     // }
     // console.log(qty);    
 
+    const handleLogOut = () => {
+        console.log("logOut");
+        dispatch(logOutRequest());
+    }
 
     return (
         <div className="main-header">
@@ -127,9 +137,18 @@ function Header({ countCart, fav }) {
                     </nav>
                     <NavLink className={({ isActive }) => isActive ? "appointment-btn scrollto active" : "appointment-btn scrollto"} to="/Appointment"><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
-                    <NavLink className={({ isActive }) => isActive ? "appointment-btn scrollto active" : "appointment-btn scrollto"} to="/Auth">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </NavLink>
+
+                    {
+                        auth.user ?
+                            <NavLink className={({ isActive }) => isActive ? "appointment-btn scrollto active" : "appointment-btn scrollto"} to="/">
+                                <span className="d-none d-md-inline" onClick={() => handleLogOut()}>Logout</span>
+                            </NavLink>
+                            :
+                            <NavLink className={({ isActive }) => isActive ? "appointment-btn scrollto active" : "appointment-btn scrollto"} to="/Auth">
+                                <span className="d-none d-md-inline">Login/ Signup</span>
+                            </NavLink>
+
+                    }
                 </div>
             </header >
         </div >

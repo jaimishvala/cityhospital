@@ -6,7 +6,8 @@ import { Main } from '../../components/UI/TextArea/TextArea';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { forgetRequest, signinRequest, signupRequest } from '../../redux/action/auth.action';
+import { forgetRequest, loginRequest, signupRequest } from '../../redux/action/auth.action';
+import { useNavigate } from 'react-router-dom';
 
 function Auth(props) {
     const [type, setType] = useState("login")
@@ -57,13 +58,19 @@ function Auth(props) {
     let AuthSchema = yup.object().shape(authObj);
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleSingUp = (data) => {
         dispatch(signupRequest(data))
     }
 
-    const handleSignIn = (data) => {
-        dispatch(signinRequest(data))
+    const handleLogIn = (data) => {
+        dispatch(loginRequest({
+            data: data,
+            callback: (route) => {
+                navigate("/")
+            }
+        }))
     }
 
     const handleForget = (data) => {
@@ -78,7 +85,7 @@ function Auth(props) {
             // console.log(values)
 
             if (type === 'login') {
-                handleSignIn(values)
+                handleLogIn(values)
             } else if (type === 'signup') {
                 handleSingUp(values);
             } else {
