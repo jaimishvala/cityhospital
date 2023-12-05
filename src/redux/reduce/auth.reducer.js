@@ -1,4 +1,4 @@
-import { AUTH_ERROR, FORGET_REQUEST, FORGET_RESPONSE, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType";
+import { AUTH_ERROR, LOGIN_RESPONSE, LOGOUT, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType";
 
 const initialValues = {
     isLoading: false,
@@ -36,16 +36,7 @@ export const authReducer = (state = initialValues, action) => {
                 user: null,
                 error: null
             }
-        // case FORGET_REQUEST:
-        //     return state
-        // case FORGET_RESPONSE:
-        //     return {
-        //         isLoading: false,
-        //         user: action.payload,
-        //         error: null
-        //     }
         default:
             return state;
     }
-
 }

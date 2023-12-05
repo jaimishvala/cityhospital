@@ -68,7 +68,8 @@ function Auth(props) {
         dispatch(loginRequest({
             data: data,
             callback: (route) => {
-                navigate("/")
+                navigate(route)
+                // navigate("/")
             }
         }))
     }

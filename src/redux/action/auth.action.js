@@ -1,4 +1,4 @@
-import { AUTH_ERROR, FORGET_REQUEST, FORGET_RESPONSE, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType"
+import { AUTH_ERROR, FORGET_REQUEST, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType"
 
 
 export const signupRequest = (data) => (dispatch) => {
@@ -29,11 +29,6 @@ export const forgetRequest = (data) => (dispatch) => {
     console.log(data);
     dispatch({ type: FORGET_REQUEST, payload: data })
 }
-
-// export const forgetResponse = (data) => (dispatch) => {
-//     console.log(data);
-//     dispatch({ type: FORGET_RESPONSE, payload: data })
-// }
 
 export const logOutRequest = () => (dispatch) => {
     dispatch({ type: LOGOUT_REQUEST })

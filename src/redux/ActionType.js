@@ -47,7 +47,6 @@ export const LOGIN_RESPONSE = "LOGIN_RESPONSE"
 
 //Forget:
 export const FORGET_REQUEST = "FORGET_REQUEST"
-export const FORGET_RESPONSE = "FORGET_RESPONSE"
 
 //LogOut:
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST"

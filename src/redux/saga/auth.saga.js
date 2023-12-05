@@ -1,7 +1,7 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
 import { FORGET_REQUEST, LOGIN_REQUEST, LOGOUT_REQUEST, SIGNUP_REQUEST } from '../ActionType'
 import { forgetAPI, logOutAPI, loginAPI, signupAPI } from '../../common/api/auth.api'
-import { authError, forgetResponse, logOut, loginResponse, signupResponse } from '../action/auth.action'
+import { authError, logOut, loginResponse, signupResponse } from '../action/auth.action'
 import { setAlert } from '../slice/alert.slice';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions:-
@@ -38,9 +38,8 @@ function* forgetUser(action) {
     console.log("forgetUser");
     try {
         const user = yield call(forgetAPI, action.payload);
-        // console.log(user);
-        // yield put(forgetResponse(user.user));
         yield put(setAlert({ text: user.message, color: 'success' }));
+
     } catch (e) {
         yield put(authError(e.message));
         yield put(setAlert({ text: e.message, color: 'error' }));
