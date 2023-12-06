@@ -7,8 +7,11 @@ import { useFormik } from 'formik';
 import { type } from '@testing-library/user-event/dist/type';
 import InputBox from '../../components/InputBox/InputBox';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addAptData } from '../../redux/slice/apt.slice';
 
-function Appointment({ onHandleSubmit }) {
+function Appointment() {
+    const dispatch = useDispatch()
 
     let d = new Date()
     let nd = new Date()
@@ -74,8 +77,8 @@ function Appointment({ onHandleSubmit }) {
 
         },
         onSubmit: (values, action) => {
-            // console.log(values);
-            onHandleSubmit(values)
+            console.log(values);
+            // onHandleSubmit(values)
 
             // let array = values.message.split(" ")
             // // console.log(array);
@@ -88,6 +91,8 @@ function Appointment({ onHandleSubmit }) {
             // console.log(newArray.join(" "));
             action.resetForm()
 
+            dispatch(addAptData(values))
+
         },
 
         validationSchema: Appointschema
@@ -95,7 +100,7 @@ function Appointment({ onHandleSubmit }) {
 
     // console.log(Appointschema);
 
-    const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } = formikObj
+    const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched, setValues } = formikObj
     // console.log(errors);
 
 
@@ -206,9 +211,8 @@ function Appointment({ onHandleSubmit }) {
                                 <InputBox
                                     type="file"
                                     name="file"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.file}
+                                    id="file"
+                                    onChange={(event) => setFieldValue("file", event.target.files[0])}
                                     TextError={errors.file && touched.file ? <span>{errors.file}</span> : ''}
                                 />
                                 {/* {errors.file && touched.file ? <span>{errors.file}</span> : null} */}
