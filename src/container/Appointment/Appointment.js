@@ -7,11 +7,28 @@ import { useFormik } from 'formik';
 import { type } from '@testing-library/user-event/dist/type';
 import InputBox from '../../components/InputBox/InputBox';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { addAptData } from '../../redux/slice/apt.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAptData, deleteAptData, getAptData, updateAptData } from '../../redux/slice/apt.slice';
+
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
 
 function Appointment() {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange1 = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const apt = useSelector(state => state.apt)
+    console.log(apt);
+
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getAptData())
+    }, [])
 
     let d = new Date()
     let nd = new Date()
@@ -92,7 +109,7 @@ function Appointment() {
             action.resetForm()
 
             dispatch(addAptData(values))
-
+            setValue("2")
         },
 
         validationSchema: Appointschema
@@ -103,6 +120,14 @@ function Appointment() {
     const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched, setValues } = formikObj
     // console.log(errors);
 
+    const handleAptDelet = (data) => {
+        dispatch(deleteAptData(data));
+    }
+
+    const handleAptEdit = (data) => {
+        // dispatch(updateAptData(data))
+        setValue("1")
+    }
 
     return (
         <Main>
@@ -115,132 +140,161 @@ function Appointment() {
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</P>
                     </div>
 
-                    <form role="form" className="php-email-form" onSubmit={handleSubmit}>
-                        <div className="row">
-                            <div className="col-md-4 form-group">
+                    <Tabs value={value} onChange={handleChange1} aria-label="basic tabs example">
+                        <Tab label="Book Appointment" value="1" />
+                        <Tab label="List Appointment" value="2" />
+                    </Tabs>
+                    <br></br><br></br>
+                    <>
+                        {
+                            value === "1" ?
+                                <form role="form" className="php-email-form" onSubmit={handleSubmit}>
+                                    <div className="row">
+                                        <div className="col-md-4 form-group">
 
-                                {/* Name: */}
-                                <InputBox type="text"
-                                    name="name"
-                                    className="form-control"
-                                    id="name"
-                                    placeholder="Your Name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                    TextError={errors.name && touched.name ? <span>{errors.name}</span> : ''}
-                                />
-                                {/* {errors.name && touched.name ? <span>{errors.name}</span> : null} */}
+                                            {/* Name: */}
+                                            <InputBox type="text"
+                                                name="name"
+                                                className="form-control"
+                                                id="name"
+                                                placeholder="Your Name"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.name}
+                                                TextError={errors.name && touched.name ? <span>{errors.name}</span> : ''}
+                                            />
+                                            {/* {errors.name && touched.name ? <span>{errors.name}</span> : null} */}
 
-                            </div>
-                            <div className="col-md-4 form-group mt-3 mt-md-0">
-                                {/* Email */}
-                                <InputBox
-                                    type="email"
-                                    className="form-control"
-                                    name="email"
-                                    id="email"
-                                    placeholder="Your Email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                    TextError={errors.email && touched.email ? <span>{errors.email}</span> : ''}
-                                />
-                                {/* {errors.email && touched.email ? <span>{errors.email}</span> : null} */}
+                                        </div>
+                                        <div className="col-md-4 form-group mt-3 mt-md-0">
+                                            {/* Email */}
+                                            <InputBox
+                                                type="email"
+                                                className="form-control"
+                                                name="email"
+                                                id="email"
+                                                placeholder="Your Email"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.email}
+                                                TextError={errors.email && touched.email ? <span>{errors.email}</span> : ''}
+                                            />
+                                            {/* {errors.email && touched.email ? <span>{errors.email}</span> : null} */}
 
-                            </div>
-                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                        </div>
+                                        <div className="col-md-4 form-group mt-3 mt-md-0">
 
-                                {/* Phone */}
-                                <InputBox
-                                    type="tel"
-                                    className="form-control"
-                                    name="phone"
-                                    id="phone"
-                                    placeholder="Your Phone"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.phone}
-                                    TextError={errors.phone && touched.phone ? <span>{errors.phone}</span> : ''}
-                                />
-                                {/* {errors.phone && touched.phone ? <span>{errors.phone}</span> : null} */}
+                                            {/* Phone */}
+                                            <InputBox
+                                                type="tel"
+                                                className="form-control"
+                                                name="phone"
+                                                id="phone"
+                                                placeholder="Your Phone"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.phone}
+                                                TextError={errors.phone && touched.phone ? <span>{errors.phone}</span> : ''}
+                                            />
+                                            {/* {errors.phone && touched.phone ? <span>{errors.phone}</span> : null} */}
 
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4 form-group mt-3">
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-4 form-group mt-3">
 
-                                {/* Date */}
-                                <InputBox
-                                    type="date"
-                                    name="date"
-                                    className="form-control datepicker"
-                                    id="date"
-                                    placeholder="Appointment Date"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.date}
-                                    TextError={errors.date && touched.date ? <span>{errors.date}</span> : ''}
-                                />
-                                {/* {errors.date && touched.date ? <span>{errors.date}</span> : null} */}
-                            </div>
-                            <div className="col-md-4 form-group mt-3">
+                                            {/* Date */}
+                                            <InputBox
+                                                type="date"
+                                                name="date"
+                                                className="form-control datepicker"
+                                                id="date"
+                                                placeholder="Appointment Date"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.date}
+                                                TextError={errors.date && touched.date ? <span>{errors.date}</span> : ''}
+                                            />
+                                            {/* {errors.date && touched.date ? <span>{errors.date}</span> : null} */}
+                                        </div>
+                                        <div className="col-md-4 form-group mt-3">
 
-                                {/* Department */}
-                                <select
-                                    name="department"
-                                    id="department"
-                                    className="form-select"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.department}
-                                >
-                                    <option value=''>Select Department</option>
-                                    <option value="Department 1">Department 1</option>
-                                    <option value="Department 2">Department 2</option>
-                                    <option value="Department 3">Department 3</option>
+                                            {/* Department */}
+                                            <select
+                                                name="department"
+                                                id="department"
+                                                className="form-select"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.department}
+                                            >
+                                                <option value=''>Select Department</option>
+                                                <option value="Department 1">Department 1</option>
+                                                <option value="Department 2">Department 2</option>
+                                                <option value="Department 3">Department 3</option>
 
-                                </select>
-                                {errors.department && touched.department ? <span style={{ color: 'red' }}>{errors.department}</span> : null}
-                            </div>
+                                            </select>
+                                            {errors.department && touched.department ? <span style={{ color: 'red' }}>{errors.department}</span> : null}
+                                        </div>
 
-                            {/* File */}
+                                        {/* File */}
 
-                            <div className="col-md-4 form-group mt-3">
+                                        <div className="col-md-4 form-group mt-3">
 
-                                <InputBox
-                                    type="file"
-                                    name="file"
-                                    id="file"
-                                    onChange={(event) => setFieldValue("file", event.target.files[0])}
-                                    TextError={errors.file && touched.file ? <span>{errors.file}</span> : ''}
-                                />
-                                {/* {errors.file && touched.file ? <span>{errors.file}</span> : null} */}
-                            </div>
+                                            <InputBox
+                                                type="file"
+                                                name="file"
+                                                id="file"
+                                                onChange={(event) => setFieldValue("file", event.target.files[0])}
+                                                TextError={errors.file && touched.file ? <span>{errors.file}</span> : ''}
+                                            />
+                                            {/* {errors.file && touched.file ? <span>{errors.file}</span> : null} */}
+                                        </div>
 
-                        </div>
+                                    </div>
 
-                        <div className="form-group mt-3">
-                            {/* Message */}
-                            <textarea
-                                className="form-control"
-                                name="message"
-                                rows={5}
-                                placeholder="Message"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.message}
-                            />
-                            {errors.message && touched.message ? <span style={{ color: 'red' }}>{errors.message}</span> : null}
+                                    <div className="form-group mt-3">
+                                        {/* Message */}
+                                        <textarea
+                                            className="form-control"
+                                            name="message"
+                                            rows={5}
+                                            placeholder="Message"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.message}
+                                        />
+                                        {errors.message && touched.message ? <span style={{ color: 'red' }}>{errors.message}</span> : null}
 
-                        </div>
-                        <div className="mb-3">
-                            <div className="loading">Loading</div>
-                            <div className="error-message" />
-                            <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                        </div>
-                        <div className="text-center"><Button type="submit">Make an Appointment</Button></div>
-                    </form>
+                                    </div>
+                                    <div className="mb-3">
+                                        <div className="loading">Loading</div>
+                                        <div className="error-message" />
+                                        <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+                                    </div>
+                                    <div className="text-center"><Button type="submit">Make an Appointment</Button></div>
+                                </form>
+
+                                :
+
+                                <div className='row'>
+                                    {
+                                        apt.apt.map((v) => {
+                                            return (
+                                                <div className='col-md-4'>
+                                                    <img src={v.file} width={"100px"} height={"100px"} />
+                                                    <p>{v.name}</p>
+                                                    <p>{v.id}</p>
+                                                    <p>{v.date}</p>
+                                                    <button onClick={() => handleAptDelet(v)}>Delete</button>
+                                                    <button onClick={() => handleAptEdit(v)}>Edit</button>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                        }
+                    </>
 
                 </div>
             </section>
