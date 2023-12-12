@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { deleteObject, getDownloadURL, ref, updateMetadata, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 
@@ -85,27 +85,51 @@ export const deleteAptData = createAsyncThunk(
 )
 
 
-// export const updateAptData = createAsyncThunk(
-//     "appointment/put",
-//     async (data) => {
-//         console.log(data);
+export const updateAptData = createAsyncThunk(
+    "appointment/put",
+    async (data) => {
+        console.log(data);
 
-//         const forestRef = ref(storage, 'appointment/' + data);
+        let aptData = { ...data }
 
-//         // Update metadata properties
-//         await updateMetadata(forestRef, newMetadata)
-//             .then(async (metadata) => {
-//                 await updateDoc(washingtonRef, { ...data, id: data.id });
-//                 // Updated metadata for 'images/forest.jpg' is returned in the Promise
-//             }).catch((error) => {
-//                 console.log(error);
-//             });
+        if (typeof data.file === "string") {
+            const aptRef = doc(db, "appointment", data.id);
+            await updateDoc(aptRef, { ...data, id: data.id });
+        } else {
 
+            const aptRef = ref(storage, 'appointment/' + data.file_name);
 
+            await deleteObject(aptRef).then(async () => {
+                await deleteDoc(doc(db, "appointment/", data.id));
+            }).catch((error) => {
+                console.log(error);
+            });
 
-//         return data;
-//     }
-// )
+            let rNo = Math.floor(Math.random() * 10000)
+
+            const storageRef = ref(storage, 'appointment/' + rNo + '_' + data.file.name);
+
+            // 'file' comes from the Blob or File API
+            await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+                console.log('Uploaded a blob or file!');
+                await getDownloadURL(snapshot.ref)
+                    .then(async (url) => {
+                        console.log(url);
+                        let aptDoc = await addDoc(collection(db, "appointment"), { ...data, file: url, file_name: rNo + '_' + data.file.name })
+                        console.log(aptDoc);
+
+                        await updateDoc(storageRef, { ...data, file: url, file_name: rNo + '_' + data.file.name });
+
+                        aptData = { ...data, file: url, file_name: rNo + '_' + data.file.name }
+                    })
+                console.log(aptData);
+            })
+                .catch((error) => console.log(error));
+        }
+
+        return aptData;
+    }
+)
 
 export const aptSlice = createSlice({
     name: "appointment",
@@ -114,6 +138,13 @@ export const aptSlice = createSlice({
     extraReducers: (builder) => {
         console.log(builder);
 
+        builder.addCase(getAptData.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.isLoading = false;
+            state.apt = action.payload;
+            state.error = null;
+        })
+
         builder.addCase(addAptData.fulfilled, (state, action) => {
             console.log(action);
 
@@ -121,6 +152,7 @@ export const aptSlice = createSlice({
             state.apt = state.apt.concat(action.payload);
             state.error = null;
         })
+
         builder.addCase(deleteAptData.fulfilled, (state, action) => {
             console.log(action);
             state.isLoading = false;
@@ -128,12 +160,20 @@ export const aptSlice = createSlice({
             state.error = null;
         })
 
-        builder.addCase(getAptData.fulfilled, (state, action) => {
-            console.log(action.payload);
+        builder.addCase(updateAptData.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.apt = action.payload;
             state.error = null;
+            state.apt = state.apt.map((v) => {
+                console.log(v);
+                if (v.id === action.payload.id) {
+                    return action.payload;
+                } else {
+                    return v;
+                }
+            })
         })
+
+
     }
 })
 

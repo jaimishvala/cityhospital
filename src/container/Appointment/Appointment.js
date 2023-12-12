@@ -12,9 +12,12 @@ import { addAptData, deleteAptData, getAptData, updateAptData } from '../../redu
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { useState } from 'react';
 
 
 function Appointment() {
+
+    const [update, setUpdate] = useState(false)
     const [value, setValue] = React.useState(0);
 
     const handleChange1 = (event, newValue) => {
@@ -108,8 +111,13 @@ function Appointment() {
             // console.log(newArray.join(" "));
             action.resetForm()
 
-            dispatch(addAptData(values))
+            if (update) {
+                dispatch(updateAptData(values))
+            } else {
+                dispatch(addAptData(values))
+            }
             setValue("2")
+            setUpdate(false)
         },
 
         validationSchema: Appointschema
@@ -125,8 +133,9 @@ function Appointment() {
     }
 
     const handleAptEdit = (data) => {
-        // dispatch(updateAptData(data))
         setValue("1")
+        setValues(data)
+        setUpdate(true)
     }
 
     return (
@@ -248,6 +257,11 @@ function Appointment() {
                                                 onChange={(event) => setFieldValue("file", event.target.files[0])}
                                                 TextError={errors.file && touched.file ? <span>{errors.file}</span> : ''}
                                             />
+                                            <img
+                                                src={typeof values.file === "string" ? values.file : URL.createObjectURL(values.file)}
+                                                width={"50px"}
+                                                height={"50px"}
+                                            />
                                             {/* {errors.file && touched.file ? <span>{errors.file}</span> : null} */}
                                         </div>
 
@@ -272,7 +286,7 @@ function Appointment() {
                                         <div className="error-message" />
                                         <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                                     </div>
-                                    <div className="text-center"><Button type="submit">Make an Appointment</Button></div>
+                                    <div className="text-center"><Button type="submit"> {update ? "Update an Appointment" : "Make an Appointment"}</Button></div>
                                 </form>
 
                                 :
