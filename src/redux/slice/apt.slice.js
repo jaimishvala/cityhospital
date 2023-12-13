@@ -91,6 +91,7 @@ export const updateAptData = createAsyncThunk(
         console.log(data);
 
         let aptData = { ...data }
+        console.log(aptData);
 
         if (typeof data.file === "string") {
             const aptRef = doc(db, "appointment", data.id);
@@ -98,35 +99,42 @@ export const updateAptData = createAsyncThunk(
         } else {
 
             const aptRef = ref(storage, 'appointment/' + data.file_name);
+            console.log(aptRef);
 
             await deleteObject(aptRef).then(async () => {
-                await deleteDoc(doc(db, "appointment/", data.id));
+                let rNo = Math.floor(Math.random() * 10000)
+
+                const storageRef = ref(storage, 'appointment/' + rNo + '_' + data.file.name);
+                console.log(storageRef);
+
+                // 'file' comes from the Blob or File API
+                await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+                    console.log('Uploaded a blob or file!');
+                    await getDownloadURL(snapshot.ref)
+                        .then(async (url) => {
+                            console.log(url);
+
+                            const washingtonRef = doc(db, "appointment", data.id);
+
+                            let newdata = { ...data, file: url, file_name: rNo + '_' + data.file.name }
+
+                            delete newdata.id;
+
+                            await updateDoc(washingtonRef, newdata);
+
+                            aptData = { ...data, file: url, file_name: rNo + '_' + data.file.name }
+
+                        })
+
+                })
+                    .catch((error) => console.log(error));
             }).catch((error) => {
                 console.log(error);
             });
 
-            let rNo = Math.floor(Math.random() * 10000)
-
-            const storageRef = ref(storage, 'appointment/' + rNo + '_' + data.file.name);
-
-            // 'file' comes from the Blob or File API
-            await uploadBytes(storageRef, data.file).then(async (snapshot) => {
-                console.log('Uploaded a blob or file!');
-                await getDownloadURL(snapshot.ref)
-                    .then(async (url) => {
-                        console.log(url);
-                        let aptDoc = await addDoc(collection(db, "appointment"), { ...data, file: url, file_name: rNo + '_' + data.file.name })
-                        console.log(aptDoc);
-
-                        await updateDoc(storageRef, { ...data, file: url, file_name: rNo + '_' + data.file.name });
-
-                        aptData = { ...data, file: url, file_name: rNo + '_' + data.file.name }
-                    })
-                console.log(aptData);
-            })
-                .catch((error) => console.log(error));
         }
 
+        console.log(aptData);
         return aptData;
     }
 )
