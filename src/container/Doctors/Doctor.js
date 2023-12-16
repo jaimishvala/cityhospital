@@ -16,7 +16,7 @@ function Doctor(props) {
     return (
 
         <Main>
-            <section id="doctors" className="doctors">  
+            <section id="doctors" className="doctors">
                 <div className="container">
                     <div className="section-title">
                         <Section>Doctors</Section>
@@ -97,14 +97,14 @@ function Doctor(props) {
                     {
                         doctor.doctor.map((v) => {
                             return (
-                                <div className='col-lg-3'>
-                                    <Card
+                                <div className='doctorCard  col-lg-3'>
+                                    {/* <Card
                                         title={v.name}
                                         SubTitle={v.desc}
-                                    />
+                                    /> */}
                                     <br></br><br></br>
-                                    {/* <h3>{v.name}</h3>
-                                    <span>{v.desc}</span> */}
+                                    <h3>{v.name}</h3>
+                                    <span>{v.desc}</span>
                                 </div>
 
                             )

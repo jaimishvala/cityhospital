@@ -42,7 +42,7 @@ function FavoriteCart(props) {
                                 <span className="like-btn" />
                             </div>
                             <div className="image">
-                                <img src="medicine1.jpg" alt />
+                                <img src="assets/img/medicine/medicine1.jpg" alt width={130} />
                             </div>
                             <div className="description">
                                 <h5>{v.name}</h5>

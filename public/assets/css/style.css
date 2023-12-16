@@ -13,6 +13,40 @@ a:hover {
   text-decoration: none;
 }
 
+/****************************Review-Swiper-Slider******************************/
+
+.card {
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 70px;
+  border-radius: 32px;
+  margin-right: 50px;
+}
+
+.reviewpage {
+  padding: 50px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.doctorCard{
+  justify-content: space-between;
+  border-radius: 20px;
+  padding: 30px;
+  margin-right:50px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.aboutCard{
+  justify-content: space-between;
+  
+  border-radius: 20px;
+  padding: 30px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
 /**************************AddToCart ***************************************/
 
 * {

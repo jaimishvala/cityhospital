@@ -70,10 +70,14 @@ export function Review(props) {
                                     return (
                                         <SwiperSlide>
                                             <Link to={"/ReviewPage/" + v.id}>
-                                                <Card
+                                                <div className='card' style={{height:"300px"}}>
+                                                    <h3>{v.name.substring(0, 20)}</h3>
+                                                    <p>{v.body.substring(0, 100)}</p>
+                                                </div>
+                                                {/* <Card
                                                     title={v.name}
                                                     SubTitle={v.body}
-                                                />
+                                                /> */}
                                             </Link>
                                         </SwiperSlide>
                                     )

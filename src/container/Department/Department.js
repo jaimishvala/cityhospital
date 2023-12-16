@@ -14,9 +14,9 @@ function Department(props) {
                     <div className="section-title">
                         <Section>Departments</Section>
 
-                        <Link to={"/Departments/1"}>Department-1</Link>
+                        {/* <Link to={"/Departments/1"}>Department-1</Link>
                         <Link to={"/Departments/2"}>Department-2</Link>
-                        <Link to={"/Departments/3"}>Department-3</Link>
+                        <Link to={"/Departments/3"}>Department-3</Link> */}
                     </div>
 
 
