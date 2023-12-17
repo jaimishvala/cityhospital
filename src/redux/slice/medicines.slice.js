@@ -78,8 +78,11 @@ export const updateMedicine = createAsyncThunk(
         // await updateMedicineData(data);
         const washingtonRef = doc(db, "medicines", data.id);
 
+        let medicineData = { ...data, id: data.id }
+
+        delete medicineData.id;
         // Set the "capital" field of the city 'DC'
-        await updateDoc(washingtonRef, { ...data, id: data.id });
+        await updateDoc(washingtonRef, medicineData);
 
         return data;
     }
